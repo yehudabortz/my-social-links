@@ -1,46 +1,45 @@
 class UsersController < ApplicationController
     
     get '/signup' do 
-        erb :'users/signup'
+            erb :'users/signup'
     end
 
     post '/signup' do
-        if logged_in?
-            redirect '/login'
+        if params[:first_name] == "" || params[:last_name] == "" || params[:username] == "" || params[:email] == "" || params[:password] == ""
+            redirect '/'
         else
-            if params[:first_name] == "" || params[:last_name] == "" || params[:username] == "" || params[:email] == "" || params[:password] == ""
-                redirect '/signup'
+            @user = User.new(params)
+            if @user && @user.authenticate(params[:password])
+                @user.save
+                session[:user_id] = @user.id
+                redirect '/dashboard'
             else
-                if !User.find_by(username: params[:username]) || !User.find_by(email: params[:email])
-                    @user = User.create(params)
-                    if @user && @user.authenticate(params[:password])
-                        session[:user_id] = @user.id
-                        redirect '/dashboard'
-                    else
-                        redirect '/login'
-                    end
-                else
-                    redirect '/login'
-                end
+                redirect '/login'
             end
         end
     end
 
+    
     get '/login' do 
-        if logged_in?
+        erb :'users/login'
+    end
+    
+
+    #test username yehudabortz 
+    # password 123
+    post '/login' do 
+        @user = User.find_by(:username => params[:username])
+        if @user && @user.authenticate(params[:password])
+            session[:user_id] = @user.id
             redirect '/dashboard'
         else
-            erb :'users/login'
+            redirect '/'
         end
     end
-
-    post '/login' do 
-
-    end
-
+    
     get '/dashboard' do
         if logged_in?
-            @user = (first_name: "Yehuda")
+            @user = current_user
             erb :'users/dashboard'
         else
             redirect '/login'
@@ -48,7 +47,8 @@ class UsersController < ApplicationController
     end
 
     get '/logout' do
-
+        session.clear
+        redirect '/login'
     end
 
 end

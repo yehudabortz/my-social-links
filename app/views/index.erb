@@ -1,4 +1,8 @@
+<% if logged_in? %>
+<h1>Welcome To My Social Links <%= @user.first_name %></h1>
+<% else %>
 <h1>Welcome To My Social Links</h1>
+<% end %>
 <section>
     <div id="center-container">
         <% @users.each do |user| %>
