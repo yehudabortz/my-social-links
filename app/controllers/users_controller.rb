@@ -12,6 +12,8 @@ class UsersController < ApplicationController
         if params.values.any?("")
             redirect '/'
         else
+            params[:username] = params[:username].downcase
+            params[:email] = params[:email].downcase
             @user = User.new(params)
             if @user && @user.authenticate(params[:password])
                 @user.save
@@ -50,6 +52,16 @@ class UsersController < ApplicationController
             erb :'users/dashboard'
         else
             redirect '/login'
+        end
+    end
+
+    get '/:username' do
+        params[:username] = params[:username].downcase
+        @user = User.find_by(:username => params[:username])
+        if @user 
+            erb :'users/profile'
+        else
+            redirect '/'
         end
     end
 
