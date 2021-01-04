@@ -1,0 +1,10 @@
+<h1>Welcome To My Social Links</h1>
+<section>
+    <div id="center-container">
+        <% @users.each do |user| %>
+            <div>
+                <h3><%= user.first_name %> <%= user.last_name %></h3>
+            </div>
+        <% end %>
+    </div>
+</section>

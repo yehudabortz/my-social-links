@@ -1,6 +1,7 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+    include Helpers
 
     configure do
         enable :sessions
@@ -9,5 +10,9 @@ class ApplicationController < Sinatra::Base
         set :views, 'app/views'
       end
 
+    get '/' do 
+        @users = User.all
+        erb :index
+    end
 
 end
