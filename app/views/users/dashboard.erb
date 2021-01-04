@@ -1,3 +1,22 @@
-<h1>Welcome</h1>
-<p><%= @user.first_name %></p>
-<a href="/logout">Logout</a>
+<section>
+    <div>
+        <h1>Welcome</h1>
+        <p><%= @user.first_name %></p>
+        <a href="/logout">Logout</a>
+    </div>
+    <div>
+        <form action="/link" method="POST">
+            <label for="link_name">Link Name</label>
+            <input type="text" name="name" id="name"><br>
+            <label for="add_link">Add Link</label>
+            <input type="text" name="url" id="url"><br>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+    <% @user.links.each do |link| %>
+<a href="https://<%= link.url %>"><%= link.name %></a>
+<% end %>
+    <table>
+
+    </table>
+</section>
