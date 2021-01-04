@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
     
-    get '/signup' do 
+    get '/signup' do
+        if logged_in?
+            redirect '/dashboard'
+        else
             erb :'users/signup'
+        end
     end
 
     post '/signup' do
-        if params[:first_name] == "" || params[:last_name] == "" || params[:username] == "" || params[:email] == "" || params[:password] == ""
+        if params.values.any?("")
             redirect '/'
         else
             @user = User.new(params)
@@ -20,11 +24,14 @@ class UsersController < ApplicationController
     end
 
     
-    get '/login' do 
-        erb :'users/login'
+    get '/login' do
+        if logged_in?
+            redirect '/dashboard'
+        else
+            erb :'users/login'
+        end
     end
     
-
     #test username yehudabortz 
     # password 123
     post '/login' do 
@@ -47,8 +54,12 @@ class UsersController < ApplicationController
     end
 
     get '/logout' do
-        session.clear
-        redirect '/login'
+        if logged_in?
+            session.clear
+            redirect '/login'
+        else
+            redirect '/'
+        end
     end
 
 end
