@@ -11,6 +11,10 @@ body {
     background: #f8f9fa;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 nav.navbar {
     /* width: 100vw; */
     padding: 10px;
@@ -30,3 +34,13 @@ div.divider.py-1 {
 tbody, tr {
     border-style: hidden !important;
 }
+
+div.nav-links-container  {
+    display: flex;
+    align-items: center;
+  justify-content: center;
+}
+div.nav-links-container > a {
+    margin-left: 10px;
+}
+
