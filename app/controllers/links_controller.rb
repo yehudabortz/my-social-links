@@ -7,10 +7,13 @@ class LinksController < ApplicationController
             redirect '/dashboard'
         else
             @user = current_user 
+            binding.pry
+
             @link = Link.new(params)
             if !@link.valid_url?
                 redirect '/dashboard'
             else
+                @link.format_url
                 @link.save
                 @user.links << @link
             end
@@ -36,5 +39,5 @@ class LinksController < ApplicationController
     end
     
 
-    
+
 end

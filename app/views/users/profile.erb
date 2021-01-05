@@ -1,7 +1,7 @@
 <h1>Profile</h1>
 <p><%= @user.first_name %></p>
 <% @user.links.each do |link| %>
-<% if link.valid_url? %>
+
     <a href="<%= link.format_url %>"><%= link.name %></a>
-<% end %>
+
 <% end %>
