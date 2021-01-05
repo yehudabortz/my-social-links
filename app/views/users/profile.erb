@@ -1,7 +1,6 @@
-<h1>Profile</h1>
-<p><%= @user.first_name %></p>
-<% @user.links.each do |link| %>
-
+<div>
+    <h1><%= @user.first_name %></h1>
+    <% @user.links.each do |link| %>
     <a href="<%= link.format_url %>"><%= link.name %></a>
-
-<% end %>
+    <% end %>
+</div>
