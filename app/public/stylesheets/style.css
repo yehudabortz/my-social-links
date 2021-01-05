@@ -4,9 +4,29 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0px;
     background: white;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     background: #f8f9fa;
+}
+
+nav.navbar {
+    /* width: 100vw; */
+    padding: 10px;
+    background: #e7ecf1 !important;
+    border-bottom: solid 1px #d8e1eb;
+}
+
+div.divider.py-1 {
+    padding: 0px !important;
+    height: 10px;
+    background: #d8e1eb;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+
+tbody, tr {
+    border-style: hidden !important;
 }
