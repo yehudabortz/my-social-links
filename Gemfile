@@ -11,6 +11,7 @@ gem 'require_all'
 gem 'sqlite3'
 gem 'thin'
 gem 'bcrypt'
+gem 'rack-flash3'
 
 group :development do 
     gem 'rake'

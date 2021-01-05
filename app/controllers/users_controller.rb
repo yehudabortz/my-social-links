@@ -12,15 +12,20 @@ class UsersController < ApplicationController
         if params.values.any?("")
             redirect '/'
         else
-            params[:username] = params[:username].downcase
-            params[:email] = params[:email].downcase
-            @user = User.new(params)
-            if @user && @user.authenticate(params[:password])
-                @user.save
-                session[:user_id] = @user.id
-                redirect '/dashboard'
-            else
+            if  @user = User.find_by(:username => params[:username])
+                flash[:message] = "Username Taken"
                 redirect '/login'
+            else
+                params[:username] = params[:username].downcase
+                params[:email] = params[:email].downcase
+                @user = User.new(params)
+                if @user && @user.authenticate(params[:password])
+                    @user.save
+                    session[:user_id] = @user.id
+                    redirect '/dashboard'
+                else
+                    redirect '/login'
+                end
             end
         end
     end
@@ -67,10 +72,10 @@ class UsersController < ApplicationController
 
     get '/logout' do
         if logged_in?
-            session.clear
-            redirect '/login'
+            session.destroy
+            redirect to '/login'
         else
-            redirect '/'
+            redirect to '/'
         end
     end
 
