@@ -8,15 +8,13 @@ class UsersController < ApplicationController
         end
     end
 
-    # !params[:username].match(/^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) || !params[:email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) || !params[:password].match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
     post '/signup' do
         if valid_credentials?
             if  user_exists?
                 flash[:message] = "Email Or Username Already Unavailable"
                 redirect '/login'
             else
-                params[:username] = params[:username].downcase
-                params[:email] = params[:email].downcase
+                downcase_username_and_email
                 @user = User.new(params)
                 if @user && @user.authenticate(params[:password])
                     @user.save
@@ -31,8 +29,7 @@ class UsersController < ApplicationController
             redirect '/signup'
         end
     end
-
-    
+ 
     get '/login' do
         if logged_in?
             redirect '/dashboard'
@@ -41,8 +38,6 @@ class UsersController < ApplicationController
         end
     end
     
-    #test username yehudabortz 
-    # password 123
     post '/login' do 
         @user = find_by_username_or_email
         if @user && @user.authenticate(params[:password])
@@ -63,7 +58,7 @@ class UsersController < ApplicationController
     end
 
     get '/:username' do
-        params[:username] = params[:username].downcase
+        downcase_username
         @user = find_by_username_or_email
         if @user 
             erb :'users/profile'
@@ -73,8 +68,8 @@ class UsersController < ApplicationController
     end
 
     delete '/logout' do
-            session.destroy
-            redirect to '/login'
+        session.destroy
+        redirect to '/login'
     end
 
 end

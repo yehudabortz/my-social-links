@@ -24,5 +24,16 @@ module Helpers
         User.find_by(:username => params[:username]) || User.find_by(:email => params[:email])
     end
 
+    def downcase_username
+        params[:username] = params[:username].downcase
+    end
+    
+    def downcase_username_and_email
+        downcase_username
+        params[:email] = params[:email].downcase
+    end
+
+
+
 
 end
