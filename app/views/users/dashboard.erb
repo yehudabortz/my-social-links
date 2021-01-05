@@ -1,20 +1,20 @@
 <section class="container">
     <div class="py-5 text-center">
         <h1>Welcome <%= @user.first_name %></h1>
-        <form class="needs-validation" action="/logout" method="POST">
-            <input type="hidden" name="_method" value="DELETE">
-            <input class="btn btn-outline-primary" type="submit" value="Logout">
-        </form>
       </div>
     <div>
+        <h3>Add A New Link</h3>
+        <br>
         <form action="/link" method="POST">
             <label for="link_name">NAME</label>
             <input class="form-control" type="text" name="name" id="name"><br>
             <label for="add_link">URL</label>
             <input class="form-control" type="text" name="url" id="url"><br>
-            <input class="btn btn-outline-primary" type="submit" value="Add New Link">
+            <input class="btn btn-outline-primary" type="submit" value="Save New Link">
         </form>
     </div>
+    <br></br>
+    <h3>Edit Your Links</h3>
     <div>
     </section>
     <br>

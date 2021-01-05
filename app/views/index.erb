@@ -1,15 +1,21 @@
-<section>
-    <div id="center-container">
+<section class="container">
+    <div class="py-5 text-center">
         <% if logged_in? %>
-        <h1>Welcome To My Social Links <%= @user.first_name %></h1>
+            <h1>Welcome To My Social Links <%= @user.first_name %></h1>
         <% else %>
-        <h1>Welcome To My Social Links</h1>
+            <h1>Welcome To My Social Links</h1>
         <% end %>
-        <% @users.each do |user| %>
-            <div>
-                <h3><%= user.first_name %> <%= user.last_name %></h3>
-                <a href="/<%= user.username %>">@<%= user.username %></a>
-            </div>
-        <% end %>
+        <h4>Browse Profiles</h4>
+        <br>
+        <div class="row">
+            <% @users.each do |user| %>
+            <a class="column" href="/<%= user.username %>">
+                <div>
+                    <h4><%= user.first_name %> <%= user.last_name %></h4>
+                    <p>@<%= user.username %></p>
+                </div>
+            </a>
+            <% end %>
+        </div>
     </div>
 </section>
