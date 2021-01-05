@@ -8,4 +8,5 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: #f8f9fa;
 }
