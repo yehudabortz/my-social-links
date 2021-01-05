@@ -2,15 +2,36 @@
 <html>
   <head>
     <title></title>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/style.css">
   </head>
   <body>
-    <% if flash.has?(:message) %>
-    <div class="flash-message">
-        <h2><%= flash[:message] %></2>
-        </div>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="/">
+        <img src="/images/My_Socia_Links_LOGO.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+      </a>
+      <% if logged_in? %>
+      <div class="nav-links-container">
+        <a href="/dashboard" class="tn btn-link">Dashboard</a>
+        <a href="/<%= current_user.username %>" class="tn btn-link">My Profile</a>
+        <form class="needs-validation" action="/logout" method="POST" style="margin-left: 10px;">
+          <input type="hidden" name="_method" value="DELETE">
+          <input class="btn btn-outline-primary" type="submit" value="Logout">
+        </form>
+      </div>
+      <% else %>
+      <div>
+        <a href="/login" class="tn btn-link">Login</a>
+        <a href="/signup" class="btn btn-outline-primary" style="margin-left: 10px;">Signup</a>
+      </div>
       <% end %>
-    <%= yield %>
+
+    </nav>
+    <% if flash.has?(:message) %>
+      <div class="py-5 text-center" style="background: white;">
+        <h2><%= flash[:message] %></2>
+      </div>
+    <% end %>
+  <%= yield %>
   </body>
 </html>
