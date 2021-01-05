@@ -1,13 +1,14 @@
-<% if logged_in? %>
-<h1>Welcome To My Social Links <%= @user.first_name %></h1>
-<% else %>
-<h1>Welcome To My Social Links</h1>
-<% end %>
 <section>
     <div id="center-container">
+        <% if logged_in? %>
+        <h1>Welcome To My Social Links <%= @user.first_name %></h1>
+        <% else %>
+        <h1>Welcome To My Social Links</h1>
+        <% end %>
         <% @users.each do |user| %>
             <div>
                 <h3><%= user.first_name %> <%= user.last_name %></h3>
+                <a href="/<%= user.username %>">@<%= user.username %></a>
             </div>
         <% end %>
     </div>
