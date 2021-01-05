@@ -10,7 +10,7 @@ class LinksController < ApplicationController
             @user = current_user 
             @link = Link.new(params)
             if !@link.valid_url?
-                "not valid"
+                redirect '/dashboard'
             else
                 @link.save
                 @user.links << @link
