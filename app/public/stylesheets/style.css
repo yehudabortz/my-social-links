@@ -17,7 +17,10 @@ a {
 
 nav.navbar {
     /* width: 100vw; */
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 2vw;
+    padding-right: 2vw;
     background: #e7ecf1 !important;
     border-bottom: solid 1px #d8e1eb;
 }
@@ -44,3 +47,25 @@ div.nav-links-container > a {
     margin-left: 10px;
 }
 
+.row {
+justify-content: center;
+}
+.column {
+    float: left;
+    width: 23%;
+    padding: 25px;
+    background: #e7ecf1;
+    margin: 12px;
+    border: solid 1px #d8e1eb;
+    border-radius: 15px;
+  }
+  
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .row a h4 {
+      color: #23252a;
+  }
