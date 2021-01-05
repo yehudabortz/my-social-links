@@ -19,7 +19,7 @@
     </section>
     <br>
     <section class="container">
-        <table class="table table-bordered table-dark">
+        <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Link Name</th>
@@ -30,7 +30,7 @@
             </thead>
             <tbody>
                 <% @user.links.each do |link| %>
-                <form class="needs-validation" action="/link" method="POST" id="update-links-form">
+                <form action="/link" method="POST" id="update-links-form">
                             <input type="hidden" name="_method" value="patch">
                             <tr class="dashboard-row">
                                 <td>
@@ -55,6 +55,6 @@
                             <% end %>
                         </tbody>
                     </table>
-                <button class="btn btn-primary" type="submit" form="update-links-form">Save Edits</button>
+                <button class="btn btn-outline-primary" type="submit" form="update-links-form">Save Edits</button>
     </div>
 </section>
