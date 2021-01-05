@@ -28,8 +28,7 @@ button {
     margin-bottom: 3px;
 }
 h1 {
-    font-family: font-family: 'Roboto Slab', serif;;
-    
+    font-family: 'Roboto Slab', serif;
 }
 
 section {
@@ -37,12 +36,11 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
 table {
     position: relative;
-    width: 100%;
+
     background: #e9f2ff;
     border: solid 1px #cac6bc;
     border-radius: 15px;
@@ -72,12 +70,8 @@ input {
     padding-bottom: 10px ;
     margin-top: 3px;
     margin-bottom: 3px;
-
 }
-
-
-
-
+    
 tr th {
     text-align: left;
 }
