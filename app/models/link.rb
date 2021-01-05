@@ -3,11 +3,11 @@ class Link < ActiveRecord::Base
 
     def format_url 
         http = "http://"
-        https = "https://"
-        if !self.url.downcase.include? http || https
-            http + self.url
-        else
+        self.url = self.url.gsub(" ","")
+        if self.url.downcase.start_with?("http://www.") || self.url.downcase.start_with?("https://www.") || self.url.downcase.start_with?("http://") || self.url.downcase.start_with?("https://")
             self.url
+        else
+            http + self.url
         end
     end
 
