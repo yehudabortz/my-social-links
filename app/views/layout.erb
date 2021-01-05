@@ -8,7 +8,7 @@
   <body>
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="/">
-        <img src="/images/My_Socia_Links_LOGO.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="/images/My_Socia_Links_LOGO.svg" width="33" height="33" class="d-inline-block align-top" alt="">
       </a>
       <% if logged_in? %>
       <div class="nav-links-container">
@@ -25,7 +25,6 @@
         <a href="/signup" class="btn btn-outline-primary" style="margin-left: 10px;">Signup</a>
       </div>
       <% end %>
-
     </nav>
     <% if flash.has?(:message) %>
       <div class="py-5 text-center" style="background: white;">
