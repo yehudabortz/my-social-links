@@ -8,12 +8,11 @@ class UsersController < ApplicationController
         end
     end
 
+    # !params[:username].match(/^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) || !params[:email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) || !params[:password].match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
     post '/signup' do
-        if params.values.any?("")
-            redirect '/'
-        else
-            if  @user = User.find_by(:username => params[:username])
-                flash[:message] = "Username Taken"
+        if valid_credentials?
+            if  user_exists?
+                flash[:message] = "Email Or Username Already Unavailable"
                 redirect '/login'
             else
                 params[:username] = params[:username].downcase
@@ -27,6 +26,9 @@ class UsersController < ApplicationController
                     redirect '/login'
                 end
             end
+        else
+            flash[:message] = "Invalid Sign Up Details"
+            redirect '/signup'
         end
     end
 
@@ -42,7 +44,7 @@ class UsersController < ApplicationController
     #test username yehudabortz 
     # password 123
     post '/login' do 
-        @user = User.find_by(:username => params[:username])
+        @user = find_by_username_or_email
         if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
             redirect '/dashboard'
@@ -62,7 +64,7 @@ class UsersController < ApplicationController
 
     get '/:username' do
         params[:username] = params[:username].downcase
-        @user = User.find_by(:username => params[:username])
+        @user = find_by_username_or_email
         if @user 
             erb :'users/profile'
         else
@@ -70,13 +72,9 @@ class UsersController < ApplicationController
         end
     end
 
-    get '/logout' do
-        if logged_in?
+    delete '/logout' do
             session.destroy
             redirect to '/login'
-        else
-            redirect to '/'
-        end
     end
 
 end

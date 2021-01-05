@@ -40,10 +40,25 @@ section {
 
 }
 
+table {
+    position: relative;
+    width: 100%;
+    background: #e9f2ff;
+    border: solid 1px #cac6bc;
+    border-radius: 15px;
+    padding: 25px;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
 div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 92vw;
     max-width: 1100px;
     margin: auto;
+    overflow: hidden;
 }
 
 
@@ -60,20 +75,8 @@ input {
 
 }
 
-table {
-    width: 92vw;
-    max-width: 1100px;
-    margin: auto;
-    margin-top: 25px;
-    margin-bottom: 25px;
-}
 
-form {
-    align-content: stretch;
-    width: 92vw;
-    max-width: 1100px;
-    margin: auto;
-}
+
 
 tr th {
     text-align: left;
@@ -81,5 +84,5 @@ tr th {
 
 .flash-message {
     padding: 25px;
-    background: #faf5e8;
+    background: #e9f2ff;
     }
