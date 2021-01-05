@@ -1,6 +1,15 @@
-<div>
-    <h1><%= @user.first_name %></h1>
-    <% @user.links.each do |link| %>
-    <a href="<%= link.format_url %>"><%= link.name %></a>
-    <% end %>
+<div class="container">
+    <div class="py-5 text-center">
+        <h1>
+            <%= @user.first_name %> <%= @user.last_name %>'s Links
+        </h1>
+    </div>
+    <div class="d-flex flex-column">
+        <% @user.links.each do |link| %>
+        <div style="margin-top: 10px; margin-bottom: 10px;">
+
+        </div>
+            <a class="btn btn-lg btn-outline-primary" href="<%= link.format_url %>"><%= link.name %></a>
+        <% end %>
+    </div>
 </div>
