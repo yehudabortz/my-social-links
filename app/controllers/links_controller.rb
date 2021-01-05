@@ -1,14 +1,20 @@
 class LinksController < ApplicationController
     
 
+
     post '/link' do 
-        params.to_s
-        #{"name"=>"TikTok", "url"=>"https://www.tiktok.com/@yehudabortz"}
-        if !logged_in? || params.values.any?("")
+    
+        if  params.values.any?("")
             redirect '/dashboard'
         else
-            @user = current_user
-            @user.links << @link = Link.create(params)
+            @user = current_user 
+            @link = Link.new(params)
+            if !@link.valid_url?
+                "not valid"
+            else
+                @link.save
+                @user.links << @link
+            end
             redirect '/dashboard'
         end
     end

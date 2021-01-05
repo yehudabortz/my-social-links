@@ -14,8 +14,10 @@
         </form>
     </div>
     <% @user.links.each do |link| %>
-<a href="https://<%= link.url %>"><%= link.name %></a>
-<% end %>
+        <% if link.valid_url? %>
+            <a href="<%= link.format_url %>"><%= link.name %></a>
+        <% end %>
+    <% end %>
     <table>
 
     </table>

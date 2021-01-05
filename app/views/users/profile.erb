@@ -1,5 +1,5 @@
 <h1>Profile</h1>
 <p><%= @user.first_name %></p>
 <% @user.links.each do |link| %>
-<a href="https://<%= link.url %>"><%= link.name %></a>
+<a href="<%= link.format_url %>"><%= link.name %></a>
 <% end %>

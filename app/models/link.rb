@@ -11,4 +11,17 @@ class Link < ActiveRecord::Base
         end
     end
 
+    def valid_url?
+        begin
+        response = Timeout::timeout(0.3) do 
+            open("#{self.format_url}").status 
+            if response == ["200","OK"]
+                true
+            end
+        end
+        rescue => error
+            false
+        end
+    end
+
 end
