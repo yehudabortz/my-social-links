@@ -13,12 +13,33 @@
             <input type="submit" value="Save">
         </form>
     </div>
-    <% @user.links.each do |link| %>
-        <% if link.valid_url? %>
-            <a href="<%= link.format_url %>"><%= link.name %></a>
-        <% end %>
-    <% end %>
-    <table>
-
-    </table>
+    <form action="/link" method="POST">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Link</th>
+                            <th>Link Name</th>
+                            <th>URL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% @user.links.each do |link| %>
+                        <input type="hidden" name="_method" value="patch">
+                        <tr>
+                            <td>
+                                <input type="text" name="name" value="<%= link.name %>">
+                            </td>
+                            <td>
+                                <input type="text" name="url" value="<%= link.url %>">
+                            </td>
+                            <td>
+                                <a href="<%= link.format_url %>"><%= link.name %></a>
+                            </td>
+                        </tr>
+                        <br>
+                        <% end %>
+                    </tbody>
+                </table>
+            <input type="submit" value="save">
+        </form>
 </section>
