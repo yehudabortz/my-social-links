@@ -14,7 +14,7 @@
       <div class="nav-links-container">
         <a href="/dashboard" class="tn btn-link">Dashboard</a>
         <a href="/<%= current_user.username %>" class="tn btn-link">My Profile</a>
-        <form class="needs-validation" action="/logout" method="POST" style="margin-left: 10px;">
+        <form class="needs-validation" action="/logout" method="POST">
           <input type="hidden" name="_method" value="DELETE">
           <input class="btn btn-outline-primary" type="submit" value="Logout">
         </form>
