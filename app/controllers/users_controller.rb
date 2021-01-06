@@ -39,7 +39,8 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect '/dashboard'
         else
-            redirect '/'
+            flash[:message] = "Unable to login. Try Again!"
+            redirect '/login'
         end
     end
     
