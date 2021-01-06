@@ -45,8 +45,10 @@
                                     <a class="btn btn-link" href="<%= link.format_url %>"><%= link.name %></a>
                                 </td>
                                 <td>
-                                    <label for="delete-checkbox">Delete</label>
-                                    <input type="checkbox" name="link[check][]" value="<%= link.id %>">
+                                    <div class="btn btn-outline-danger btn-sm">
+                                        <label for="delete-checkbox">Delete</label>
+                                        <input type="checkbox" name="link[check][]" value="<%= link.id %>" style="margin-left: 10px;">
+                                    </div> 
                                 </td>
                             </tr>
                             <% end %>
@@ -60,12 +62,16 @@
             <% end %>
         </div>
         <div>
-            <form action="/:username" method="post">
-                <input type="hidden" name="_method" value="delete">
-                <input type="hidden" name="user[username]" value="<%= @user.username %>">
-                <input type="submit" value="Delete Account">
-        </form>
+        </div>
     </div>
-</div>
+    <div class="container">
+        <div class="d-flex flex-column">
+            <form action="/:username" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="user[username]" value="<%= @user.username %>">
+                    <input class="btn btn-outline-danger btn-sm" type="submit" value="Delete Account">
+            </form>
+        </div>
+    </div>
 
 
