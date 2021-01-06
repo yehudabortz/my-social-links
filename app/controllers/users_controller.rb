@@ -63,6 +63,23 @@ class UsersController < ApplicationController
             redirect '/'
         end
     end
+
+    post '/:username/follow' do 
+        if logged_in?
+            user = find_by_username_or_email
+            if !current_user.following.include?(user)
+                current_user.following << user
+                redirect "/#{params[:username]}"
+            else
+                flash[:message] = "Already Following @#{params[:username]}"
+                redirect "/#{params[:username]}"
+            end
+        else
+            flash[:message] = "Please Login To Follow @#{params[:username]}"
+            redirect "/login"
+        end
+
+    end
     
     delete '/logout' do
         session.destroy
