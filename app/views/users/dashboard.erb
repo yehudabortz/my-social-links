@@ -29,13 +29,13 @@
                             <th scope="col"></th>
                         </tr>
                     </thead>
+                    <form action="/link" method="POST" id="update-links-form">
+                    <input type="hidden" name="_method" value="patch">
                     <tbody>
                         <% @user.links.each do |link| %>
-                        <form action="/link" method="POST" id="update-links-form">
-                            <input type="hidden" name="_method" value="patch">
                             <tr class="dashboard-row">
                                 <td>
-                                    <input type="hidden" name="original_link[id][]" value="<%= link.id %>">
+                                    <input type="hidden" name="link[original_link][id][]" value="<%= link.id %>">
                                     <input class="form-control" type="text" id="<%= link.id %>" name="link[name][]" value="<%= link.name %>">
                                 </td>
                                 <td>
@@ -44,20 +44,21 @@
                                 <td>
                                     <a class="btn btn-link" href="<%= link.format_url %>"><%= link.name %></a>
                                 </td>
-                            </form>
-                            <td>
-                            <form class="row-form" action="/link" method="POST">
-                                <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="link[id]" value="<%= link.id %>">
-                                    <input class="btn btn-outline-primary" type="submit" value="delete">
-                                </form>
-                            </td>
+                                <td>
+                                    <label for="delete-checkbox">Delete</label>
+                                  <input type="checkbox" name="link[check][]" value="<%= link.id %>">
+                                </td>
                             </tr>
-                        <% end %>
-                    </tbody>
+                            <% end %>
+
+                        </tbody>
+                    </form>
                 </table>
                 <button class="btn btn-outline-primary" type="submit" form="update-links-form">Save Edits</button>
+                <br>
             </div>
         <% end %>
     </div>
 </div>
+
+
