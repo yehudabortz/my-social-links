@@ -13,7 +13,7 @@ group :production do
     gem 'thin'
     gem 'bcrypt'
     gem 'rack-flash3'
-    gem "pg"
+    gem 'pg'
   end
   
   group :development, :test do
