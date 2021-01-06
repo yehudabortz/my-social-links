@@ -63,6 +63,16 @@ class UsersController < ApplicationController
         end
     end
 
+    delete '/:username' do 
+        if logged_in? && params[:username] == current_user.username
+            current_user.delete
+            redirect '/'
+        else
+            redirect '/dashboard'
+            flash[:message] = "Something Went Wrong"
+        end
+    end
+
     delete '/logout' do
         session.destroy
         redirect to '/login'
