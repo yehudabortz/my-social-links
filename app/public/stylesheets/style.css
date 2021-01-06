@@ -81,3 +81,13 @@ div.d-flex {
 div.d-flex.flex-column {
     margin-top: 50px;
 }
+
+.login-requirements {
+padding: 25px;
+    align-items: left;
+}
+.login-requirements-item {
+    text-align: left;
+    font-size: 12px;
+    color: #969fa8;
+}
