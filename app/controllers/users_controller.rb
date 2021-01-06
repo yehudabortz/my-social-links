@@ -15,14 +15,9 @@ class UsersController < ApplicationController
                 redirect '/login'
             else
                 downcase_username_and_email
-                @user = User.new(params)
-                if @user && @user.authenticate(params[:password])
-                    @user.save
-                    session[:user_id] = @user.id
-                    redirect '/dashboard'
-                else
-                    redirect '/login'
-                end
+                @user = User.create(params)
+                session[:user_id] = @user.id
+                redirect '/dashboard'
             end
         else
             flash[:message] = "Invalid Sign Up Details"
