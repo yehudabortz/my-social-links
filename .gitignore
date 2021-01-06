@@ -1,2 +1,2 @@
-db/
+db/development.sqlite
 Gemfile.lock
