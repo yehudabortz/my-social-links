@@ -27,10 +27,20 @@ div.divider.py-1 {
     margin-top: 25px;
     margin-bottom: 10px;
 }
+tr {
+    margin-top: 20px !important;
+}
 
 tbody, tr {
     border-style: hidden !important;
 }
+
+.table-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 
 div.nav-links-container  {
     display: flex;
