@@ -43,12 +43,6 @@ div.nav-links-container a {
     margin-right: 15px;
 }
 
-div.nav-links-container #second-to-last-link {
-    color: red;
-    margin-left: 15px;
-    margin-right: 200px;
-}
-
 .row {
 justify-content: center;
 }
@@ -78,4 +72,8 @@ div.d-flex {
     padding: 35px;
     border: solid 1px #d8e1eb;
     border-radius: 15px;
+}
+
+div.d-flex.flex-column {
+    margin-top: 50px;
 }

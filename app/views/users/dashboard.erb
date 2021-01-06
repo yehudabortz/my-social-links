@@ -1,36 +1,37 @@
-<section class="container">
-    <div class="py-5 text-center">
-        <h1>Welcome <%= @user.first_name %></h1>
-      </div>
-    <div>
-        <h3>Add A New Link</h3>
-        <br>
-        <form action="/link" method="POST">
-            <label for="link_name">NAME</label>
-            <input class="form-control" type="text" name="name" id="name"><br>
-            <label for="add_link">URL</label>
-            <input class="form-control" type="text" name="url" id="url"><br>
-            <input class="btn btn-outline-primary" type="submit" value="Save New Link">
-        </form>
-    </div>
+<div class="container">
+    <div class="d-flex flex-column">
+        <div class="py-5 text-center">
+            <h1>Welcome <%= @user.first_name %></h1>
+          </div>
+        <div>
+            <h3>Add A New Link</h3>
+            <br>
+            <form action="/link" method="POST">
+                <label for="link_name">NAME</label>
+                <input class="form-control" type="text" name="name" id="name"><br>
+                <label for="add_link">URL</label>
+                <input class="form-control" type="text" name="url" id="url"><br>
+                <input class="btn btn-outline-primary" type="submit" value="Save New Link">
+            </form>
+        </div>
     <br></br>
-    <h3>Edit Your Links</h3>
-    <div>
-    </section>
-    <br>
-    <section class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Link Name</th>
-                    <th scope="col">URL</th>
-                    <th scope="col">Link</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @user.links.each do |link| %>
-                <form action="/link" method="POST" id="update-links-form">
+        <% if !@user.links.empty? %>
+            <h3>Edit Your Links</h3>
+            <div>
+            <br>
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Link Name</th>
+                            <th scope="col">URL</th>
+                            <th scope="col">Link</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @user.links.each do |link| %>
+                        <form action="/link" method="POST" id="update-links-form">
                             <input type="hidden" name="_method" value="patch">
                             <tr class="dashboard-row">
                                 <td>
@@ -52,9 +53,11 @@
                                 </form>
                             </td>
                             </tr>
-                            <% end %>
-                        </tbody>
-                    </table>
+                        <% end %>
+                    </tbody>
+                </table>
                 <button class="btn btn-outline-primary" type="submit" form="update-links-form">Save Edits</button>
+            </div>
+        <% end %>
     </div>
-</section>
+</div>
