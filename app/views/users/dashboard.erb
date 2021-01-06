@@ -46,18 +46,25 @@
                                 </td>
                                 <td>
                                     <label for="delete-checkbox">Delete</label>
-                                  <input type="checkbox" name="link[check][]" value="<%= link.id %>">
+                                    <input type="checkbox" name="link[check][]" value="<%= link.id %>">
                                 </td>
                             </tr>
                             <% end %>
-
+                            
                         </tbody>
                     </form>
                 </table>
                 <button class="btn btn-outline-primary" type="submit" form="update-links-form">Save Edits</button>
                 <br>
             </div>
-        <% end %>
+            <% end %>
+        </div>
+        <div>
+            <form action="/:username" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="user[username]" value="<%= @user.username %>">
+                <input type="submit" value="Delete Account">
+        </form>
     </div>
 </div>
 

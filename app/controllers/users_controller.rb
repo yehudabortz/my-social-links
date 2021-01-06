@@ -64,8 +64,10 @@ class UsersController < ApplicationController
     end
 
     delete '/:username' do 
-        if logged_in? && params[:username] == current_user.username
-            current_user.delete
+        if params[:user][:username] == current_user.username
+            @user = current_user
+            @user.delete
+            session.destroy
             redirect '/'
         else
             redirect '/dashboard'
