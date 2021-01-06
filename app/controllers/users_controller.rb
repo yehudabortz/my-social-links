@@ -63,7 +63,12 @@ class UsersController < ApplicationController
             redirect '/'
         end
     end
-
+    
+    delete '/logout' do
+        session.destroy
+        redirect to '/login'
+    end
+    
     delete '/:username' do 
         if params[:user][:username] == current_user.username
             @user = current_user
@@ -76,9 +81,5 @@ class UsersController < ApplicationController
         end
     end
 
-    delete '/logout' do
-        session.destroy
-        redirect to '/login'
-    end
 
 end
