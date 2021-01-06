@@ -7,6 +7,10 @@
         </div>
         <% @user.links.each do |link| %>
             <a class="btn btn-lg btn-outline-primary" href="<%= link.format_url %>" style="margin-top: 10px; margin-bottom: 10px"><%= link.name %></a>
-        <% end %>
+            <% end %>
     </div>
 </div>
+
+<form action="/<%= @user.username %>/follow" method="POST">
+<input type="submit" value="Follow">
+</form>
