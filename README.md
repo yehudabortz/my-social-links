@@ -7,7 +7,7 @@ Sign Up / Sign In to your account and CREATE, READ, UPDATE and DELETE your links
 
 #### Clone this repository.
 
-Use Ruby Gem [bundler](https://bundler.io/) to install dependencies.
+- Use Ruby Gem [bundler](https://bundler.io/) to install dependencies.
 
 ``` bash
 gem install bundler
