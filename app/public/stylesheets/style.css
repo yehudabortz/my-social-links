@@ -69,3 +69,10 @@ justify-content: center;
   .row a h4 {
       color: #23252a;
   }
+
+  div.d-flex {
+      background: white;
+      padding: 35px;
+      border: solid 1px #d8e1eb;
+      border-radius: 15px;
+  }
