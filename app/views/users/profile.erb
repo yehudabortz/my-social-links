@@ -1,4 +1,40 @@
 <div class="container">
+    <div class="d-flex flex-row" style="margin-top: 25px; justify-content: space-between;">
+        <div style="display: flex;">
+
+            <div>
+                <p style="margin-right: 40px;">Followers</p>
+                <p id="followers" style="color: #2b72f4;"><%= @user.followers.count %></p>
+            </div>
+            <div>
+                <p>Following</p>
+                <p id="followers" style="color: #2b72f4;"><%= @user.following.count %></p>
+            </div>
+        </div>
+        <!-- --Follow Button-------- -->
+        <% if @user.followers.include?(current_user) && current_user.followers.include?(@user) %>
+        <div>
+            <form action="/<%= @user.username %>/follow" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <input class="btn btn-primary btn-sm" type="submit" value="Friends">
+            </form>    
+        </div>
+        <% elsif @user.followers.include?(current_user) && !current_user.followers.include?(@user) %>
+        <div>
+            <form action="/<%= @user.username %>/follow" method="POST">
+                <input class="btn btn-primary btn-sm" type="submit" value="Follow Back">
+            </form>    
+        </div>
+        <% elsif !@user.followers.include?(current_user) && current_user.followers.include?(@user) %>
+        <div>
+            <form action="/<%= @user.username %>/follow" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <input class="btn btn-primary btn-sm" type="submit" value="Following">
+            </form>   
+        </div> 
+            <% end %>
+            <!-- --Follow Button-------- -->
+    </div>
     <div class="d-flex flex-column">
         <div class="py-5 text-center">
             <h1>
@@ -10,7 +46,3 @@
             <% end %>
     </div>
 </div>
-
-<form action="/<%= @user.username %>/follow" method="POST">
-<input type="submit" value="Follow">
-</form>
