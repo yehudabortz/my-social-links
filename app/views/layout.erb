@@ -13,7 +13,7 @@
       <% if logged_in? %>
       <div class="nav-links-container">
         <a href="/dashboard" class="tn btn-link">Dashboard</a>
-        <a href="/<%= current_user.username %>" class="tn btn-link">My Profile</a>
+        <a style="margin-right: 30px;" href="/<%= current_user.username %>" class="tn btn-link">My Profile</a>
         <form class="needs-validation" action="/logout" method="POST">
           <input type="hidden" name="_method" value="DELETE">
           <input class="btn btn-outline-primary" type="submit" value="Logout">
