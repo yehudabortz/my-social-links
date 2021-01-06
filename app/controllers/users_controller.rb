@@ -59,13 +59,23 @@ class UsersController < ApplicationController
         if @user 
             erb :'users/profile'
         else
-            flash[:message] = "#{params[:username]} Does Not Exist"
+            flash[:message] = "@#{params[:username]} Does Not Exist"
             redirect '/'
         end
     end
 
+    get '/:username/follow' do 
+        if logged_in? && user_exists?
+            flash[:message] = "You Must Clock The Follow Button To Follow @#{params[:username]}"
+            redirect "/#{params[:username]}"
+        else
+            flash[:message] = "Unable To Follow @#{params[:username]}"
+            redirect "/#{params[:username]}"
+        end
+    end
+
     post '/:username/follow' do 
-        if logged_in?
+        if logged_in? && user_exists?
             user = find_by_username_or_email
             if !current_user.following.include?(user)
                 current_user.following << user
@@ -78,7 +88,6 @@ class UsersController < ApplicationController
             flash[:message] = "Please Login To Follow @#{params[:username]}"
             redirect "/login"
         end
-
     end
     
     delete '/logout' do
