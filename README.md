@@ -1,7 +1,7 @@
 # My Social Links
 ### A one page directory for all your social media links.
 
-Sign Up / Sign In to your account and CREATE, READ, UPDATE and DELETE your links from the dashboard.
+Using Sinatra and Active Record a user can Sign Up / Sign In to their account and CREATE, READ, UPDATE and DELETE links from the dashboard.
 
 ## Installation
 
