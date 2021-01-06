@@ -37,6 +37,7 @@ class LinksController < ApplicationController
                     end
                 end
             end
+            flash[:message] = "Updated"
             redirect '/dashboard'
         else
             redirect '/login'
@@ -48,8 +49,11 @@ class LinksController < ApplicationController
         if logged_in? && @user.links.find(params[:link][:id])
             @link = Link.find(params[:link][:id])
             @link.delete
+            flash[:message] = "#{@link.name} Deleted"
             redirect '/dashboard'
         else
+            flash[:message] = "Updated"
+            flash[:message] = "Unable To Delete #{@link.name}"
             redirect '/dashboard'
         end
     end
