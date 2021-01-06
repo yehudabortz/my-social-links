@@ -24,7 +24,7 @@ class LinksController < ApplicationController
     
     patch '/link' do
         if logged_in?
-            params[:original_link][:id].each_with_index do |id, index|
+            params[:link][:original_link][:id].each_with_index do |id, index|
                 @link = Link.find(id)
                 unless @link.name == params[:link][:name][index]
                     @link.name = params[:link][:name][index]
@@ -32,9 +32,12 @@ class LinksController < ApplicationController
                 end
                 unless @link.url == params[:link][:url][index]
                     @link.url = params[:link][:url][index]
-                    unless @link.valid_url?
+                    if @link.valid_url?
                         @link.save
                     end
+                end
+                if params[:link][:check] != nil && params[:link][:check].include?(@link.id.to_s)
+                    @link.delete
                 end
             end
             flash[:message] = "Updated"
