@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_04_171004) do
+ActiveRecord::Schema.define(version: 2021_01_06_192036) do
 
   create_table "links", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,11 @@ ActiveRecord::Schema.define(version: 2021_01_04_171004) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+  end
+
+  create_table "users_users", force: :cascade do |t|
+    t.string "relationship_type"
+    t.integer "user_id"
   end
 
 end
