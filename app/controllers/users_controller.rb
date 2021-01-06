@@ -90,6 +90,24 @@ class UsersController < ApplicationController
         end
     end
     
+    delete '/:username/follow' do 
+        if logged_in? && user_exists?
+            followed_user = find_by_username_or_email
+
+            if current_user.following.include?(followed_user)
+                current_user.following.delete(followed_user)
+                flash[:message] = "Unfollowed @#{params[:username]}"
+                redirect "/#{params[:username]}"
+            else
+                flash[:message] = "Unable to perform this action."
+                redirect "/#{params[:username]}"
+            end
+        else
+            flash[:message] = "Unable to perform this action."
+            redirect "/#{params[:username]}"
+        end
+    end
+    
     delete '/logout' do
         session.destroy
         redirect to '/login'
