@@ -51,10 +51,14 @@ justify-content: center;
     float: left;
     width: 23%;
     padding: 25px;
-    background: #e7ecf1;
+    background: white;
     margin: 12px;
     border: solid 1px #d8e1eb;
     border-radius: 15px;
+}
+
+.column div {
+    justify-content: center;
 }
   
 .row:after {
