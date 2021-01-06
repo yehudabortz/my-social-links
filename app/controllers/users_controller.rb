@@ -63,6 +63,7 @@ class UsersController < ApplicationController
         if @user 
             erb :'users/profile'
         else
+            flash[:message] = "#{params[:username]} Does Not Exist"
             redirect '/'
         end
     end
