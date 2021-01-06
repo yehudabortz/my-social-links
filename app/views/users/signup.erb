@@ -2,7 +2,7 @@
     <div class="py-5 text-center">
         <h3>My Social Links</h3>
         <h5>Signup</h5>
-        <br>
+        <div class="d-flex flex-column">
         <form class="row g-3" action="/signup" method="POST">
             <input class="form-control" type="text" name="first_name" placeholder="First Name" required><br>
             <input class="form-control" type="text" name="last_name" placeholder="Last Name" required><br>
@@ -11,5 +11,13 @@
             <input class="form-control" type="password" name="password" placeholder="Password" required><br>
             <input class="btn btn-lg btn-primary btn-block" type="submit" value="Signup">
         </form>
+            <ul class="login-requirements">
+                <p class="login-requirements-item">Password Must Contain</p>
+                <li class="login-requirements-item">Minimum 8 Charachters</li>
+                <li class="login-requirements-item">Capital & Lowercase Letter</li>
+                <li class="login-requirements-item">1 Special Charachter</li>
+                <li class="login-requirements-item">1 Number</li>
+            </ul>
+        </div>
     </div>
 </div>
