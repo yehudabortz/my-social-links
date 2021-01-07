@@ -1,7 +1,4 @@
 <div class="container">
-    <div class="d-flex flex-row" style="margin-top: 25px;> 
-
-    </div>
     <div class="d-flex flex-row" style="margin-top: 25px;">
         <div>
             <p style="margin-right: 40px;">Followers</p>
@@ -12,67 +9,65 @@
             <p id="followers" style="color: #2b72f4;"><%= @user.following.count %></p>
         </div>
     </div>
-    <div class="d-flex flex-column" style="margin-top: 25px;">
-        <div class="py-5 text-center">
-            <h1>Welcome <%= @user.first_name %></h1>
-          </div>
-        <div>
-            <h3>Add A New Link</h3>
-            <br>
-            <form action="/link" method="POST">
-                <label for="link_name">NAME</label>
-                <input class="form-control" type="text" name="name" id="name" ><br>
-                <label for="add_link">URL</label>
-                <input class="form-control" type="text" name="url" id="url"><br>
-                <input class="btn btn-outline-primary" type="submit" value="Save New Link">
-            </form>
-        </div>
-    <br></br>
-        <% if !@user.links.empty? %>
-            <h3>Edit Your Links</h3>
+        <div class="d-flex flex-column" style="margin-top: 25px;">
+            <div class="py-5 text-center">
+                <h1>Welcome <%= @user.first_name %></h1>
+            </div>
             <div>
-            <br>
-            <div class="table-wrap">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Link Name</th>
-                            <th scope="col">URL</th>
-                            <th scope="col">Link</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <form action="/link" method="POST" id="update-links-form">
-                    <input type="hidden" name="_method" value="patch">
-                    <tbody>
-                        <% @user.links.each do |link| %>
-                            <tr class="dashboard-row">
-                                <td style="padding-left: 0px; paddin-right: 0px;">
-                                    <input type="hidden" name="link[original_link][id][]" value="<%= link.id %>">
-                                    <input class="form-control" type="text" id="<%= link.id %>" name="link[name][]" value="<%= link.name %>">
-                                </td>
-                                <td style="padding-left: 0px; paddin-right: 0px;">
-                                    <input class="form-control" type="text" name="link[url][]" value="<%= link.url %>">
-                                </td>
-                                <td style="padding-left: 0px; paddin-right: 0px;">
-                                    <a class="btn btn-link" href="<%= link.format_url %>"><%= link.name %></a>
-                                </td>
-                                <td style="padding-left: 0px; paddin-right: 0px;">
-                                    <div class="btn btn-outline-danger btn-sm">
-                                        <label for="delete-checkbox">Delete</label>
-                                        <input type="checkbox" name="link[check][]" value="<%= link.id %>" style="margin-left: 10px;">
-                                    </div> 
-                                </td>
+                <h3>Add A New Link</h3>
+                <br>
+                <form action="/link" method="POST">
+                    <label for="link_name">NAME</label>
+                    <input class="form-control" type="text" name="name" id="name"><br>
+                    <label for="add_link">URL</label>
+                    <input class="form-control" type="text" name="url" id="url"><br>
+                    <input class="btn btn-outline-primary" type="submit" value="Save New Link">
+                </form>
+            </div>
+            <br></br>
+            <% if !@user.links.empty? %>
+                <h3>Edit Your Links</h3>
+                <br>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Link Name</th>
+                                <th scope="col">URL</th>
+                                <th scope="col">Link</th>
+                                <th scope="col"></th>
                             </tr>
-                            <% end %>
-                        </tbody>
-                    </form>
+                        </thead>
+                        <form action="/link" method="POST" id="update-links-form">
+                            <input type="hidden" name="_method" value="patch">
+                            <tbody>
+                                <% @user.links.each do |link| %>
+                                    <tr class="dashboard-row">
+                                        <td style="padding-left: 0px; padding-right: 10px;">
+                                            <input type="hidden" name="link[original_link][id][]" value="<%= link.id %>">
+                                            <input class="form-control" type="text" id="<%= link.id %>" name="link[name][]" value="<%= link.name %>">
+                                        </td>
+                                        <td style="padding-left: 0px; padding-right: 10px;">
+                                            <input class="form-control" type="text" name="link[url][]" value="<%= link.url %>">
+                                        </td>
+                                        <td style="padding-left: 0px; padding-right: 10px;">
+                                            <a class="btn btn-link" href="<%= link.format_url %>"><%= link.name %></a>
+                                        </td>
+                                        <td style="padding-left: 0px; padding-right: 10px;">
+                                            <div class="btn btn-outline-danger btn-sm">
+                                                <label for="delete-checkbox">Delete</label>
+                                                <input type="checkbox" name="link[check][]" value="<%= link.id %>" style="margin-left: 10px;">
+                                            </div> 
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </form>
                 </table>
                 <button class="btn btn-outline-primary" type="submit" form="update-links-form">Save Edits</button>
                 <br>
+                <% end %>
             </div>
-        <% end %>
-        </div>
         <div>
         </div>
     </div>

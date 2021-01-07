@@ -43,27 +43,27 @@
                             <!-- --Follow Button-------- -->
                                 <% if current_user.following.include?(user) && user.following.include?(current_user) %>
                                 <div>
-                                    <form action="/<%= @user.username %>/follow" method="POST">
+                                    <form action="/<%= user.username %>/follow" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input class="btn btn-outline-dark btn-sm" type="submit" value="Friends">
                                     </form>    
                                 </div>
                                 <% elsif !current_user.following.include?(user) && user.following.include?(current_user) %>
                                 <div>
-                                    <form action="/<%= @user.username %>/follow" method="POST">
+                                    <form action="/<%= user.username %>/follow" method="POST">
                                         <input class="btn btn-outline-primary btn-sm" type="submit" value="Follow Back">
                                     </form>    
                                 </div>
                                 <% elsif current_user.following.include?(user) && !user.following.include?(current_user) %>
                                 <div>
-                                    <form action="/<%= @user.username %>/follow" method="POST">
+                                    <form action="/<%= user.username %>/follow" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input class="btn btn-outline-dark btn-sm" type="submit" value="Following">
                                     </form>   
                                 </div> 
                                 <% elsif !current_user.following.include?(user) && !user.following.include?(current_user) %>
                                 <div>
-                                    <form action="/<%= @user.username %>/follow" method="POST">
+                                    <form action="/<%= user.username %>/follow" method="POST">
                                         <input class="btn btn-primary btn-sm" type="submit" value="Follow">
                                     </form>   
                                 </div>
