@@ -12,35 +12,35 @@
             </div>
         </div>
         
-        <% if @user.username !=current_user.username %>
+        <% if logged_in? && params[:username] != current_user.username %>
         <!-- --Follow Button-------- -->
-        <% if @user.followers.include?(current_user) && @user.following.include?(current_user) %>
-        <div>
-            <form action="/<%= @user.username %>/follow" method="POST">
-                <input type="hidden" name="_method" value="DELETE">
-                <input class="btn btn-primary btn-sm" type="submit" value="Friends">
-            </form>    
-        </div>
-        <% elsif !@user.followers.include?(current_user) && @user.following.include?(current_user) %>
-        <div>
-            <form action="/<%= @user.username %>/follow" method="POST">
-                <input class="btn btn-primary btn-sm" type="submit" value="Follow Back">
-            </form>    
-        </div>
-        <% elsif @user.followers.include?(current_user) && !@user.following.include?(current_user) %>
-        <div>
-            <form action="/<%= @user.username %>/follow" method="POST">
-                <input type="hidden" name="_method" value="DELETE">
-                <input class="btn btn-primary btn-sm" type="submit" value="Following">
-            </form>   
-        </div> 
-        <% elsif !@user.followers.include?(current_user) && !@user.following.include?(current_user) %>
-        <div>
-            <form action="/<%= @user.username %>/follow" method="POST">
-                <input class="btn btn-primary btn-sm" type="submit" value="Follow">
-            </form>   
-        </div> 
-            <% end %>
+            <% if @user.followers.include?(current_user) && @user.following.include?(current_user) %>
+            <div>
+                <form action="/<%= @user.username %>/follow" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input class="btn btn-primary btn-sm" type="submit" value="Friends">
+                </form>    
+            </div>
+            <% elsif !@user.followers.include?(current_user) && @user.following.include?(current_user) %>
+            <div>
+                <form action="/<%= @user.username %>/follow" method="POST">
+                    <input class="btn btn-primary btn-sm" type="submit" value="Follow Back">
+                </form>    
+            </div>
+            <% elsif @user.followers.include?(current_user) && !@user.following.include?(current_user) %>
+            <div>
+                <form action="/<%= @user.username %>/follow" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input class="btn btn-primary btn-sm" type="submit" value="Following">
+                </form>   
+            </div> 
+            <% elsif !@user.followers.include?(current_user) && !@user.following.include?(current_user) %>
+            <div>
+                <form action="/<%= @user.username %>/follow" method="POST">
+                    <input class="btn btn-primary btn-sm" type="submit" value="Follow">
+                </form>   
+            </div> 
+                <% end %>
             <!-- --Follow Button-------- -->
     <% end %>
 
