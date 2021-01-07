@@ -24,7 +24,7 @@ bundle install
 rake db:migrate
 ```
 
-- Use rake to add seed data.
+- Use Rake to add seed data.
 ```bash
 rake db:seed
 ```
