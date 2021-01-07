@@ -13,7 +13,7 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
     gem 'thin'
     gem 'bcrypt'
     gem 'rack-flash3'
-    gem "sqlite3"
+
 
 
     gem 'rake'
@@ -21,3 +21,12 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
     gem 'faker'
     gem "tux"
     gem 'pry'
+
+    group :development do
+        gem 'sqlite3'
+     end
+     
+     group :production do
+        gem 'pg'
+        gem 'activerecord-postgresql-adapter'
+     end

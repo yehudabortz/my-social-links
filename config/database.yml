@@ -1,10 +1,14 @@
-default: &default
-  adapter: 'sqlite3'
-  database: 'db/development.sqlite'
-
 development:
-  <<: *default
+  adapter: sqlite3
+  database: database.db
 
 test:
-  <<: *default
-  database: 'db/test.sqlite'
+  adapter: sqlite3
+  database: database.db
+
+production:
+  adapter: postgresql
+  database: msl_database
+  username: username
+  password: password
+  host: localhost
