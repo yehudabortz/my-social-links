@@ -75,17 +75,22 @@ class UsersController < ApplicationController
     end
 
     post '/:username/follow' do 
-        if logged_in? && user_exists?
-            user = find_by_username_or_email
-            if !current_user.following.include?(user)
-                current_user.following << user
+        if logged_in? && user_exists? && params[:username]
+            if params[:username] == current_user.username
+                flash[:message] = "Action Not Allow"
                 redirect "/"
             else
-                flash[:message] = "Already Following @#{params[:username]}"
-                redirect "/#{params[:username]}"
+                user = find_by_username_or_email
+                if !current_user.following.include?(user)
+                    current_user.following << user
+                    redirect "/"
+                else
+                    flash[:message] = "Already Following @#{params[:username]}"
+                    redirect "/#{params[:username]}"
+                end
             end
         else
-            flash[:message] = "Please Login To Follow @#{params[:username]}"
+            flash[:message] = "Please login to follow @#{params[:username]}"
             redirect "/login"
         end
     end
