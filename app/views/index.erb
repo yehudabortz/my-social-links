@@ -33,8 +33,7 @@
         <% end %>
         <div class="row">
             <% @users.each do |user| %>
-            <% if session[:user_id] != nil %>
-
+            <% if logged_in? %>
             <a class="column" href="/<%= user.username %>">
                 <div class="py-5 text-center">
                     <h4><%= user.first_name %> <%= user.last_name %></h4>
