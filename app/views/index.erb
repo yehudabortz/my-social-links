@@ -2,10 +2,25 @@
     <div class="py-5 text-center">
         <% if logged_in? %>
         <h1>Welcome <%= @user.first_name %></h1>
-        <% else %>
-        <h1>Welcome To My Social Links</h1>
-        <% end %>
         <h4>Browse Profiles</h4>
+        <% else %>
+        <div class="container" style="max-width: 500px;">
+            <div class="py-5 text-center">
+                <div class="d-flex flex-column text-center">
+                    <div>
+                        <img src="/images/My_Socia_Links_LOGO.svg" width="75" height="75" class="d-inline-block align-top">
+                    </div>
+                    <br>
+                    <h4>Welcome To My Social Links</h4>
+                    <a class="btn btn-outline-primary btn-lg" href="/login" style="margin-top: 15px;">Log in</a>
+                    <a class="btn btn-primary btn-lg"href="/signup" style="margin-top: 15px;">Sign up</a>
+                </div>
+                <br>
+                <div>
+                </div>
+            </div>
+    </div>
+        <% end %>
         <br>
         <% if logged_in? %>
         <div class="d-flex flex-column" style="margin-top: 25px; max-height: 55vh; overflow: scroll;"> 

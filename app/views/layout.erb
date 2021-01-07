@@ -16,13 +16,13 @@
         <a style="margin-right: 30px;" href="/<%= current_user.username %>" class="tn btn-link">My Profile</a>
         <form class="needs-validation" action="/logout" method="POST">
           <input type="hidden" name="_method" value="DELETE">
-          <input class="btn btn-outline-primary" type="submit" value="Logout">
+          <input class="btn btn-outline-primary" type="submit" value="Log out">
         </form>
       </div>
       <% else %>
       <div class="nav-links-container">
-        <a href="/login" class="tn btn-link">Login</a>
-        <a href="/signup" class="btn btn-outline-primary" style="margin-left: 10px;">Signup</a>
+        <a href="/login" class="tn btn-link">Log in</a>
+        <a href="/signup" class="btn btn-outline-primary" style="margin-left: 10px;">Sign up</a>
       </div>
       <% end %>
     </nav>
