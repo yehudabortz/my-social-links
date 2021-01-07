@@ -79,7 +79,7 @@ class UsersController < ApplicationController
             user = find_by_username_or_email
             if !current_user.following.include?(user)
                 current_user.following << user
-                redirect "/#{params[:username]}"
+                redirect "/"
             else
                 flash[:message] = "Already Following @#{params[:username]}"
                 redirect "/#{params[:username]}"
