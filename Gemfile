@@ -16,17 +16,17 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 
 
-    gem 'rake'
     gem 'shotgun'
     gem 'faker'
     gem "tux"
     gem 'pry'
-
+    
     group :development do
         gem 'sqlite3'
-     end
-     
-     group :production do
+    end
+    
+    group :production do
+        gem 'rake'
         gem 'pg'
         gem 'activerecord-postgresql-adapter'
      end
