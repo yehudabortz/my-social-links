@@ -4,15 +4,12 @@ ENV['SINATRA_ENV'] ||= "development"
 require 'bundler/setup'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
-
 require 'timeout'
 require 'open-uri'
 require_all 'app'
 require 'sinatra'
-
 configure :development do
     ActiveRecord::Base.establish_connection(ENV['SINATRA_ENV'].to_sym)
-
   end
   
 configure :production do
