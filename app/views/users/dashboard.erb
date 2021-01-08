@@ -70,7 +70,7 @@
                 <div>
                     <h3>Edit Your Profile</h3>
                     <br>
-                    <form action="/<%= @user.username %>" method="POST" id="update-profile-form">
+                    <form action="/<%= @user.username %>/edit" method="POST" id="update-profile-form">
                         <input type="hidden" name="_method" value="PATCH">
                         <input type="hidden" name="id" value="<%= @user.id %>">
                         <label for="username">USERNAME</label>

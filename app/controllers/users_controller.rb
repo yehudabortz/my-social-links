@@ -73,7 +73,7 @@ class UsersController < ApplicationController
         end
     end
 
-    patch '/:username' do 
+    patch '/:username/edit' do 
         if logged_in?
             if ids_match? && valid_credentials?
                 downcase_username_and_email
