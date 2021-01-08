@@ -39,7 +39,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect '/dashboard'
         else
-            flash[:message] = "Unable to login. Try Again!"
+            flash[:message] = "Unable to log in. Try Again!"
             redirect '/login'
         end
     end
@@ -52,7 +52,16 @@ class UsersController < ApplicationController
             redirect '/login'
         end
     end
-
+    
+    get  '/feed' do 
+        if logged_in?
+            erb :"users/feed"
+        else
+            flash[:message] = "Please log in to view your feed."
+            redirect '/'
+        end
+    end
+    
     get '/:username' do
         downcase_username
         @user = find_by_username_or_email
@@ -112,7 +121,7 @@ class UsersController < ApplicationController
             redirect "/#{params[:username]}"
         end
     end
-    
+
     delete '/logout' do
         session.destroy
         redirect to '/login'
