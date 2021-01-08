@@ -43,16 +43,16 @@
                 <% end %>
             <!-- --Follow Button-------- -->
     <% end %>
-
-    </div>
+</div>
     <div class="d-flex flex-column">
         <div class="py-5 text-center">
             <h1>
                 <%= @user.first_name %> <%= @user.last_name %>'s Links
             </h1>
-        </div>
+    </div>
+        <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
         <% @user.links.each do |link| %>
-            <a class="btn btn-lg btn-outline-primary" href="<%= link.format_url %>" style="margin-top: 10px; margin-bottom: 10px"><%= link.name %></a>
-            <% end %>
+            <a class="btn btn-lg btn-outline-primary" href="<%= link.format_url %>" style="margin-top: 10px; margin-bottom: 10px;"><%= link.name %></a>
+        <% end %>
     </div>
 </div>
