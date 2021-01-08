@@ -11,7 +11,11 @@
                         <p>@<%= user.username %></p>
                         <% params[:username] != current_user.username %>
                         <!-- --Follow Button-------- -->
-                        <% if current_user.following.include?(user) && user.following.include?(current_user) %>
+                        <% if current_user.username == user.username %>
+                        <div>
+                            <input class="btn btn-secondary btn-sm" type="submit" value="Follow">
+                        </div>
+                        <% elsif current_user.following.include?(user) && user.following.include?(current_user) %>
                         <div>
                             <form action="/<%= user.username %>/follow" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
@@ -37,6 +41,7 @@
                                 <input class="btn btn-primary btn-sm" type="submit" value="Follow">
                             </form>   
                         </div>
+                    
                         <% end %>
                         <!-- --Follow Button-------- -->
                     </div>
