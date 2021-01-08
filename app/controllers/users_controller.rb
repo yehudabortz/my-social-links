@@ -40,7 +40,7 @@ class UsersController < ApplicationController
             redirect '/dashboard'
         else
             flash[:message] = "Unable to log in. Try Again!"
-            redirect '/'
+            redirect '/login'
         end
     end
     
