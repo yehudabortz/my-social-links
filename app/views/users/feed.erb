@@ -1,0 +1,28 @@
+<section class="container">
+    <div class="py-5 text-center">
+        <h1>Welcome <%= current_user.first_name %></h1>
+        <h4>Your Feed</h4>
+        <br>
+        <div class="d-flex flex-column" style="margin-top: 25px; overflow: scroll;"> 
+            <div style="display: flex;">
+                <h5>Recent Activity</h5>
+            </div>
+            <br>
+            <% current_user.following.order(:updated_at).reverse.each do |user| %>
+                <% unless user.username == current_user.username || user.links.empty? %>
+                    <div class="d-flex flex-column">
+                        <div style="display: flex;">
+                                <a class="btn btn-dark" href="<%= user.username %>">@<%= user.username %></a>
+                        </div>
+                        <br>
+                        <% user.links.order(:updated_at).reverse.each do |link| %>
+                            <div style="display: flex;">
+                                <a class="btn btn-link" href="<%= link.format_url %>">just added – <%= link.name %></a>
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</section>
