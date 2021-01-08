@@ -13,7 +13,14 @@ module Helpers
     end
     
     def validate_signup_details
-        params[:username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) && params[:email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) || params[:updated_username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) && params[:updated_email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:updated_password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+        if params[:username] && params[:email] && params[:password]
+            params[:username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+            params[:email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
+            params[:password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+        elsif params[:updated_username] && params[:updated_email]
+            params[:updated_username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+            params[:updated_email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
+        end
     end
 
     def user_exists?
@@ -41,12 +48,21 @@ module Helpers
     end
 
     def downcase_username
-        params[:username] = params[:username].downcase
+        if params[:username] && params[:updated_username]
+            params[:username] = params[:username].downcase
+            params[:updated_username] = params[:updated_username].downcase
+        elsif params[:username]
+            params[:username] = params[:username].downcase
+        end
     end
     
     def downcase_username_and_email
         downcase_username
-        params[:email] = params[:email].downcase
+        if params[:email]
+            params[:email] = params[:email].downcase
+        elsif params[:updated_email]
+            params[:updated_email] = params[:updated_email].downcase
+        end
     end
 
     def ids_match?

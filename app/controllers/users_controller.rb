@@ -75,7 +75,8 @@ class UsersController < ApplicationController
 
     patch '/:username' do 
         if logged_in?
-            if ids_match?
+            if ids_match? && valid_credentials?
+                downcase_username_and_email
                 if username_available? && email_available?
                     current_user.update(username: params[:updated_username])
                     current_user.update(email: params[:updated_email])
