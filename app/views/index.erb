@@ -9,7 +9,7 @@
             </div>
             <br>
             <% current_user.following.order(:updated_at).reverse.each do |user| %>
-                <% = user.name %>
+                <% = user.first_name %>
             <% end %>
         </div>
         <br>
