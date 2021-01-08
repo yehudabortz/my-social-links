@@ -8,7 +8,7 @@
                 <h5>Recent Activity</h5>
             </div>
             <br>
-            <% current_user.following.order(:updated_at).reverse.each do |user| %>
+            <% current_user.following.each do |user| %>
                 <% = user.first_name %>
             <% end %>
         </div>
