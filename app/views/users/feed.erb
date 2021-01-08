@@ -8,14 +8,14 @@
                 <h5>Recent Activity</h5>
             </div>
             <br>
-            <% @user.following.order.reverse.each do |user| %>
+            <% @user.following.reverse.each do |user| %>
                 <% unless user.username == @user.username || user.links.empty? %>
                     <div class="d-flex flex-column">
                         <div style="display: flex;">
                                 <a class="btn btn-dark" href="<%= user.username %>">@<%= user.username %></a>
                         </div>
                         <br>
-                        <% user.links.order.reverse.each do |link| %>
+                        <% user.links.reverse.each do |link| %>
                             <div style="display: flex;">
                                 <a class="btn btn-link" href="<%= link.format_url %>">just added – <%= link.name %></a>
                             </div>
