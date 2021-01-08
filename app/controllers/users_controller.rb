@@ -77,7 +77,7 @@ class UsersController < ApplicationController
     post '/:username/follow' do 
         if logged_in? && user_exists? && params[:username]
             if params[:username] == current_user.username
-                flash[:message] = "Action Not Allow"
+                flash[:message] = "Action Not Allowed"
                 redirect "/"
             else
                 user = find_by_username_or_email
