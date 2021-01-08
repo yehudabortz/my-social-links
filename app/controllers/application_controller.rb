@@ -17,8 +17,10 @@ class ApplicationController < Sinatra::Base
         @users = User.all
         if logged_in?
             @user = current_user
+            erb :index
+        else
+            erb :index_not_logged_in
         end
-        erb :index
     end
-
+    
 end
