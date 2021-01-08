@@ -13,15 +13,31 @@ module Helpers
     end
     
     def validate_signup_details
-        params[:username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) && params[:email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+        params[:username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) && params[:email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) || params[:updated_username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) && params[:updated_email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:updated_password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
     end
 
     def user_exists?
         !!find_by_username_or_email
     end
+
+    def username_available?
+        !find_by_updated_username
+    end
+
+    def email_available?
+        !find_by_updated_email
+    end
     
     def find_by_username_or_email
         User.find_by(:username => params[:username]) || User.find_by(:email => params[:email])
+    end
+
+    def find_by_updated_username
+        User.find_by(:username => params[:updated_username])
+    end
+
+    def find_by_updated_email
+        User.find_by(:email => params[:updated_email])
     end
 
     def downcase_username
@@ -32,6 +48,15 @@ module Helpers
         downcase_username
         params[:email] = params[:email].downcase
     end
+
+    def ids_match?
+        !!match_params_id_to_current_user
+    end
+
+    def match_params_id_to_current_user
+        params[:id] == current_user.id.to_s
+    end
+
 
 
 

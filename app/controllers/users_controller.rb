@@ -73,6 +73,39 @@ class UsersController < ApplicationController
         end
     end
 
+    patch '/:username' do 
+        if logged_in?
+            if ids_match?
+                if username_available? && email_available?
+                    current_user.update(username: params[:updated_username])
+                    current_user.update(email: params[:updated_email])
+                    flash[:message] = "Profile Updated"
+                    redirect '/dashboard'
+                elsif username_available? && params[:updated_email] == current_user.email
+                    current_user.update(username: params[:updated_username])
+                    flash[:message] = "Username Updated"
+                    redirect '/dashboard'
+                elsif email_available? && params[:updated_username] == current_user.username
+                    current_user.update(email: params[:updated_email])
+                    flash[:message] = "Email Updated"
+                    redirect '/dashboard'
+                elsif !username_available? && !email_available?
+                    flash[:message] = "Unable to update profile."
+                    redirect '/dashboard'
+                else
+                    flash[:message] = "Unable to update profile."
+                    redirect '/dashboard'
+                end
+            else
+                flash[:message] = "Unable to update profile."
+                redirect '/dashboard'
+            end
+        else
+            flash[:message] = "Please log in to make changes to your profile."
+            redirect '/login'
+        end
+    end
+
     get '/:username/follow' do 
         if logged_in? && user_exists?
             flash[:message] = "You Must Clock The Follow Button To Follow @#{params[:username]}"
