@@ -55,6 +55,7 @@ class UsersController < ApplicationController
     
     get  '/feed' do 
         if logged_in?
+            @user = current_user
             erb :"users/feed"
         else
             flash[:message] = "Please log in to view your feed."
