@@ -9,14 +9,7 @@
             </div>
             <br>
             <% current_user.following.order(:updated_at).reverse.each do |user| %>
-            <% unless user.username == current_user.username || user.links.empty? %>
-                    <div class="d-flex flex-column">
-                        <div style="display: flex;">
-                                <a class="btn btn-dark" href="<%= user.username %>">@<%= user.username %></a>
-                        </div>
-                        <br>
-                    </div>
-                <% end %>
+                <% = user.name %>
             <% end %>
         </div>
         <br>
