@@ -174,6 +174,12 @@ class UsersController < ApplicationController
     delete '/:username' do 
         if params[:user][:username] == current_user.username
             @user = current_user
+            @user.followers.each do |user|
+                user.following_count -=1
+            end
+            @user.following.each do |user|
+                user.followers_count -=1
+            end
             @user.delete
             session.destroy
             redirect '/'
