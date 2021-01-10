@@ -71,7 +71,7 @@ module Helpers
     end
 
     def add_to_followed_users_follower_count
-        @followed_user.followers_count += 1
+        @followed_user.followers_count  = @followed_user.following_count += 1
         @followed_user.save
     end
     
@@ -81,7 +81,7 @@ module Helpers
     end
     
     def remove_from_followed_users_follower_count
-        @followed_user.follower_count -= 1
+        @followed_user.followers_count  = @followed_user.following_count -= 1
         @followed_user.save
     end
     
