@@ -130,8 +130,10 @@ class UsersController < ApplicationController
                 @user = current_user
                 if !current_user.following.include?(@followed_user)
                     @user.following << @followed_user
-                    add_to_follower_count
-                    add_to_following_count
+                    # Adds 1 to the user who is being followed, follower_count.
+                    add_to_followed_users_follower_count
+                    # Adds 1 to the user who is following, following_count.
+                    add_to_current_user_following_count
                     redirect "/"
                 else
                     flash[:message] = "Already Following @#{params[:username]}"
@@ -146,10 +148,13 @@ class UsersController < ApplicationController
     
     delete '/:username/follow' do 
         if logged_in? && user_exists?
-            followed_user = find_by_username_or_email
+            @followed_user = find_by_username_or_email
+            @user = current_user
 
-            if current_user.following.include?(followed_user)
-                current_user.following.delete(followed_user)
+            if @user.following.include?(@followed_user)
+                @user.following.delete(@followed_user)
+                remove_from_followed_users_follower_count
+                remove_from_current_user_following_count
                 flash[:message] = "Unfollowed @#{params[:username]}"
                 redirect "/#{params[:username]}"
             else

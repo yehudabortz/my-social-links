@@ -70,10 +70,25 @@ module Helpers
         params[:id] == current_user.id.to_s
     end
 
-    def add_to_follower_count
+    def add_to_followed_users_follower_count
         @followed_user.follower_count += 1
         @followed_user.save
     end
-
+    
+    def add_to_current_user_following_count
+        @user.following_count = @user.following_count += 1
+        @user.save
+    end
+    
+    def remove_from_followed_users_follower_count
+        @followed_user.follower_count -= 1
+        @followed_user.save
+    end
+    
+    def remove_from_current_user_following_count
+        @user.following_count = @user.following_count -= 1
+        @user.save
+    end
+    
 
 end
