@@ -175,10 +175,12 @@ class UsersController < ApplicationController
         if params[:user][:username] == current_user.username
             @user = current_user
             @user.followers.each do |user|
-                user.following_count -=1
+                user.following_count = user.following_count -=1
+                user.save
             end
             @user.following.each do |user|
-                user.followers_count -=1
+                user.followers_count = user.followers_count-=1
+                user.save
             end
             @user.delete
             session.destroy
