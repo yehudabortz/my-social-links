@@ -70,8 +70,10 @@ module Helpers
         params[:id] == current_user.id.to_s
     end
 
-
-
+    def add_to_follower_count
+        @followed_user.follower_count += 1
+        @followed_user.save
+    end
 
 
 end

@@ -16,6 +16,9 @@ class UsersController < ApplicationController
             else
                 downcase_username_and_email
                 @user = User.create(params)
+                @user.following_count = 0
+                @user.follower_count = 0
+                @user.save
                 session[:user_id] = @user.id
                 redirect '/dashboard'
             end
@@ -123,9 +126,12 @@ class UsersController < ApplicationController
                 flash[:message] = "Action Not Allowed"
                 redirect "/"
             else
-                user = find_by_username_or_email
-                if !current_user.following.include?(user)
-                    current_user.following << user
+                @followed_user = find_by_username_or_email
+                @user = current_user
+                if !current_user.following.include?(@followed_user)
+                    @user.following << @followed_user
+                    add_to_follower_count
+                    add_to_following_count
                     redirect "/"
                 else
                     flash[:message] = "Already Following @#{params[:username]}"

@@ -17,4 +17,7 @@ require 'faker'
     @user.links << Link.create(name: Faker::Company.name, url: Faker::Internet.domain_name)
     @user.links << Link.create(name: Faker::Company.name, url: Faker::Internet.domain_name)
     @user.links << Link.create(name: Faker::Company.name, url: Faker::Internet.domain_name)
+    @user.following_count = 0
+    @user.follower_count = 0
+    @user.save
 end
