@@ -17,7 +17,7 @@ class UsersController < ApplicationController
                 downcase_username_and_email
                 @user = User.create(params)
                 @user.following_count = 0
-                @user.follower_count = 0
+                @user.followers_count = 0
                 @user.save
                 session[:user_id] = @user.id
                 redirect '/dashboard'

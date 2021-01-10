@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_01_10_000529) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
-    t.integer "follower_count"
+    t.integer "followers_count"
     t.integer "following_count"
   end
 
