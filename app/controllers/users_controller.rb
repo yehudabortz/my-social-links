@@ -113,8 +113,13 @@ class UsersController < ApplicationController
 
     get '/:username/follow' do 
         if logged_in? && user_exists?
-            flash[:message] = "You Must Click The Follow Button To Follow @#{params[:username]}"
-            redirect "/#{params[:username]}"
+            if current_user.username == params[:username]
+                flash[:message] = "Action Not Allowed"
+                redirect "/#{params[:username]}"
+            else
+                flash[:message] = "You Must Click The Follow Button To Follow @#{params[:username]}"
+                redirect "/#{params[:username]}"
+            end
         else
             flash[:message] = "Unable To Follow @#{params[:username]}"
             redirect "/#{params[:username]}"
