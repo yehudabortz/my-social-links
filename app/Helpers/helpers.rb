@@ -11,24 +11,34 @@ module Helpers
     def valid_credentials?
         !!validate_signup_details
     end
-    
+
     def validate_signup_details
         if params[:username] && params[:email] && params[:password]
-            params[:first_name] = params[:first_name].strip
-            params[:last_name] = params[:last_name].strip
-            params[:username] = params[:username].strip.downcase
-            params[:email] = params[:email].strip.downcase
-            params[:password] = params[:password].strip
-
+            params[:first_name] = params[:first_name].gsub(" ","")
+            params[:last_name] = params[:last_name].gsub(" ","")
+            params[:username] = params[:username].gsub(" ","").downcase
+            params[:email] = params[:email].gsub(" ","").downcase
+            params[:password] = params[:password].gsub(" ","")
+            
             params[:username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) && params[:email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)  
         elsif params[:updated_username] && params[:updated_email]
-            params[:updated_username] = params[:updated_username].strip.downcase
-            params[:updated_email] = params[:updated_email].strip.downcase
+            params[:updated_username] = params[:updated_username].gsub(" ","").downcase
+            params[:updated_email] = params[:updated_email].gsub(" ","").downcase
+            
+            params[:updated_email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:updated_username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+        elsif params[:username] && params[:password]
+            params[:username] = params[:username].gsub(" ","").downcase
+            params[:password] = params[:password].gsub(" ","")
+            params[:username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) && params[:password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+
+        elsif params[:updated_username] && params[:updated_email] && !
+            params[:updated_username] = params[:updated_username].gsub(" ","").downcase
+            params[:updated_email] = params[:updated_email].gsub(" ","").downcase
 
             params[:updated_email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:updated_username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
         end
     end
-
+    
     def user_exists?
         !!find_by_username_or_email
     end
@@ -51,24 +61,6 @@ module Helpers
 
     def find_by_updated_email
         User.find_by(:email => params[:updated_email])
-    end
-
-    def downcase_username
-        if params[:username] && params[:updated_username]
-            params[:username] = params[:username].downcase
-            params[:updated_username] = params[:updated_username].downcase
-        elsif params[:username]
-            params[:username] = params[:username].downcase
-        end
-    end
-    
-    def downcase_username_and_email
-        downcase_username
-        if params[:email]
-            params[:email] = params[:email].downcase
-        elsif params[:updated_email]
-            params[:updated_email] = params[:updated_email].downcase
-        end
     end
 
     def ids_match?

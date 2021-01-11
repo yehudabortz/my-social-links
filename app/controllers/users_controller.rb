@@ -14,7 +14,6 @@ class UsersController < ApplicationController
                 flash[:message] = "Email Or Username Already Unavailable"
                 redirect '/login'
             else
-                downcase_username_and_email
                 @user = User.create(params)
                 @user.update(following_count: 0)
                 @user.update(followers_count: 0)
@@ -36,14 +35,17 @@ class UsersController < ApplicationController
     end
     
     post '/login' do 
-        params[:username] = params[:username].strip.downcase
-        params[:password] = params[:password].strip
-        @user = find_by_username_or_email
-        if @user && @user.authenticate(params[:password])
-            session[:user_id] = @user.id
-            redirect '/dashboard'
+        if valid_credentials?
+            @user = find_by_username_or_email
+            if @user && @user.authenticate(params[:password])
+                session[:user_id] = @user.id
+                redirect '/dashboard'
+            else
+                flash[:message] = "Unable to log in. Try Again!"
+                redirect '/login'
+            end
         else
-            flash[:message] = "Unable to log in. Try Again!"
+            flash[:message] = "Invalid"
             redirect '/login'
         end
     end
@@ -68,19 +70,20 @@ class UsersController < ApplicationController
     end
     
     get '/:username' do
-        downcase_username
-        @user = find_by_username_or_email
-        if @user 
-            erb :'users/profile'
+        if valid_credentials?
+            @user = find_by_username_or_email
+            if @user 
+                erb :'users/profile'
+            else
+                erb :not_found
+            end
         else
             erb :not_found
         end
     end
-
     patch '/:username/edit' do 
         if logged_in?
             if ids_match? && valid_credentials?
-                downcase_username_and_email
                 if username_available? && email_available?
                     current_user.update(username: params[:updated_username])
                     current_user.update(email: params[:updated_email])
@@ -110,6 +113,7 @@ class UsersController < ApplicationController
             redirect '/login'
         end
     end
+
 
     get '/:username/follow' do 
         if logged_in? && user_exists?
