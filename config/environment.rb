@@ -9,7 +9,6 @@ require 'open-uri'
 require 'sinatra'
 require 'rack-flash'
 
-require_relative './keys.rb'
 require_all 'app'
 
 
