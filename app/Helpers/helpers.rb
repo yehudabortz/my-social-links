@@ -9,10 +9,10 @@ module Helpers
     end
 
     def valid_credentials?
-        !!validate_signup_details
+        !!validate_input_details
     end
 
-    def validate_signup_details
+    def validate_input_details
         if params[:username] && params[:email] && params[:password]
             params[:first_name] = params[:first_name].gsub(" ","")
             params[:last_name] = params[:last_name].gsub(" ","")
@@ -20,22 +20,21 @@ module Helpers
             params[:email] = params[:email].gsub(" ","").downcase
             params[:password] = params[:password].gsub(" ","")
             
-            params[:username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) && params[:email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)  
+            params[:username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) && params[:email].match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/) && params[:password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)  
         elsif params[:updated_username] && params[:updated_email]
             params[:updated_username] = params[:updated_username].gsub(" ","").downcase
             params[:updated_email] = params[:updated_email].gsub(" ","").downcase
-            
-            params[:updated_email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:updated_username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+
+            params[:updated_email].match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/) && params[:updated_username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
         elsif params[:username] && params[:password]
             params[:username] = params[:username].gsub(" ","").downcase
             params[:password] = params[:password].gsub(" ","")
+
             params[:username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/) && params[:password].match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+        elsif params[:username]
+            params[:username] = params[:username].gsub(" ","").downcase
 
-        elsif params[:updated_username] && params[:updated_email] && !
-            params[:updated_username] = params[:updated_username].gsub(" ","").downcase
-            params[:updated_email] = params[:updated_email].gsub(" ","").downcase
-
-            params[:updated_email].match(/[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && params[:updated_username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+            params[:username].match(/^(?=[a-zA-Z0-9._]{1,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
         end
     end
     
