@@ -13,11 +13,11 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
     gem 'thin'
     gem 'bcrypt'
     gem 'rack-flash3'
-    gem 'securerandom'
     gem 'shotgun'
     gem 'faker'
     gem "tux"
     gem 'pry'
+    gem 'dotenv'
     
     group :development do
         gem 'sqlite3'
