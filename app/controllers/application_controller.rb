@@ -7,12 +7,11 @@ class ApplicationController < Sinatra::Base
     
     configure do
         enable :sessions
-        set :session_secret, ENV['SESSIONS_KEY'] ||= "#{ SecureRandom.hex(20) }"
+        set :session_secret, ENV['SESSIONS_KEY']
         set :public_folder, 'app/public'
         set :views, 'app/views'
       end
 
-      binding.pry
     get '/' do 
         if logged_in?
             @users = User.all

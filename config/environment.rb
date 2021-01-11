@@ -8,7 +8,6 @@ require 'timeout'
 require 'open-uri'
 require 'sinatra'
 require 'rack-flash'
-require 'securerandom'
 
 require_relative './keys.rb'
 require_all 'app'

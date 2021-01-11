@@ -50,7 +50,6 @@ GEM
       rack-test (~> 0.6.2)
       ripl (>= 0.7.0)
     ruby2_keywords (0.0.2)
-    securerandom (0.1.0)
     shotgun (0.9.2)
       rack (>= 1.0)
     sinatra (2.1.0)
@@ -91,7 +90,6 @@ DEPENDENCIES
   rack-flash3
   rake
   require_all
-  securerandom
   shotgun
   sinatra
   sinatra-activerecord
