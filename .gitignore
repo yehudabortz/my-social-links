@@ -1,2 +1,2 @@
 db/development.sqlite
-.env
+config/keys.rb
