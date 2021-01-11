@@ -113,7 +113,7 @@ class UsersController < ApplicationController
 
     get '/:username/follow' do 
         if logged_in? && user_exists?
-            flash[:message] = "You Must Clock The Follow Button To Follow @#{params[:username]}"
+            flash[:message] = "You Must Click The Follow Button To Follow @#{params[:username]}"
             redirect "/#{params[:username]}"
         else
             flash[:message] = "Unable To Follow @#{params[:username]}"
