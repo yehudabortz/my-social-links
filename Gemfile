@@ -17,6 +17,7 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
     gem 'faker'
     gem "tux"
     gem 'pry'
+    gem 'securerandom'
     
     group :development do
         gem 'sqlite3'
