@@ -73,7 +73,7 @@ class UsersController < ApplicationController
         if @user 
             erb :'users/profile'
         else
-            redirect '/'
+            erb :not_found
         end
     end
 
