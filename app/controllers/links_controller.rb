@@ -24,24 +24,29 @@ class LinksController < ApplicationController
     
     patch '/link' do
         if logged_in?
-            params[:link][:original_link][:id].each_with_index do |id, index|
-                @link = Link.find(id)
-                unless @link.name == params[:link][:name][index]
-                    @link.name = params[:link][:name][index]
-                    @link.save
-                end
-                unless @link.url == params[:link][:url][index]
-                    @link.url = params[:link][:url][index]
-                    if @link.valid_url?
+            if params[:link][:name].any?("") || params[:link][:url].any?("")
+                flash[:message] = "Input Cannot Be Blank"
+                redirect '/dashboard'
+            else
+                params[:link][:original_link][:id].each_with_index do |id, index|
+                    @link = Link.find(id)
+                    unless @link.name == params[:link][:name][index]
+                        @link.name = params[:link][:name][index].strip
                         @link.save
                     end
+                    unless @link.url == params[:link][:url][index]
+                        @link.url = params[:link][:url][index].strip
+                        if @link.valid_url?
+                            @link.save
+                        end
+                    end
+                    if params[:link][:check] != nil && params[:link][:check].include?(@link.id.to_s)
+                        @link.delete
+                    end
                 end
-                if params[:link][:check] != nil && params[:link][:check].include?(@link.id.to_s)
-                    @link.delete
-                end
+                flash[:message] = "Updated"
+                redirect '/dashboard'
             end
-            flash[:message] = "Updated"
-            redirect '/dashboard'
         else
             redirect '/login'
         end
