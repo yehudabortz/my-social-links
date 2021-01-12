@@ -70,17 +70,14 @@ class UsersController < ApplicationController
     end
     
     get '/:username' do
-        if valid_credentials?
-            @user = find_by_username_or_email
-            if @user 
-                erb :'users/profile'
-            else
-                erb :not_found
-            end
+        @user = find_by_username_or_email
+        if @user 
+            erb :'users/profile'
         else
             erb :not_found
         end
     end
+    
     patch '/:username/edit' do 
         if logged_in?
             if ids_match? && valid_credentials?
