@@ -49,10 +49,21 @@
             <h1>
                 <%= @user.first_name %> <%= @user.last_name %>'s Links
             </h1>
-    </div>
-        <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
-        <% @user.links.each do |link| %>
-            <a class="btn btn-lg btn-outline-primary" href="<%= link.format_url %>" style="margin-top: 10px; margin-bottom: 10px;"><%= link.name %></a>
+        </div>
+        <% if params[:username] == current_user.username %>
+            <% @user.links.each do |link| %>
+                <a class="btn btn-lg btn-outline-primary" href="<%= link.format_url %>" style="margin-top: 10px; margin-bottom: 10px; position: relative;">
+                    <form action="/link/<%= link.id %>" method="POST" style="position: absolute; right: 0; padding-right: 15px;">
+                        <input type="hidden" name="_method" value="delete">
+                        <input class="btn btn-outline-danger btn-sm" type="submit" value="delete" style="border: none;">
+                    </form>
+                    <%= link.name %>
+                </a>
+            <% end %>
+        <% else %>
+                <% @user.links.each do |link| %>
+                    <a class="btn btn-lg btn-outline-primary" href="<%= link.format_url %>" style="margin-top: 10px; margin-bottom: 10px;"><%= link.name %></a>
+                <% end %>
         <% end %>
     </div>
 </div>

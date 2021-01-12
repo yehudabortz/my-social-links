@@ -54,13 +54,13 @@ class LinksController < ApplicationController
         end
     end
 
-    delete '/link' do
+    delete '/link/:id' do
         @user = current_user
-        if logged_in? && @user.links.find(params[:link][:id])
-            @link = Link.find(params[:link][:id])
+        if logged_in? && @user.links.find(params[:id])
+            @link = Link.find(params[:id])
             @link.delete
             flash[:message] = "#{@link.name} Deleted"
-            redirect '/dashboard'
+            redirect "/#{@user.username}"
         else
             flash[:message] = "Unable To Delete #{@link.name}"
             redirect '/dashboard'
