@@ -62,7 +62,6 @@ class LinksController < ApplicationController
             flash[:message] = "#{@link.name} Deleted"
             redirect '/dashboard'
         else
-            flash[:message] = "Updated"
             flash[:message] = "Unable To Delete #{@link.name}"
             redirect '/dashboard'
         end
