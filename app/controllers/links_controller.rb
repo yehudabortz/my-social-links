@@ -2,7 +2,8 @@ class LinksController < ApplicationController
 
     post '/link' do
         if logged_in?
-            if  params.values.any?("")
+            if  params[:name].strip.empty? || params[:url].strip.empty?
+                flash[:message] = "Input Cannot Be Blank"
                 redirect '/dashboard'
             else
                 @user = current_user 
@@ -24,7 +25,8 @@ class LinksController < ApplicationController
     
     patch '/link' do
         if logged_in?
-            if params[:link][:name].any?("") || params[:link][:url].any?("")
+
+            if params[:link][:name].find {|p| p.strip.empty?}
                 flash[:message] = "Input Cannot Be Blank"
                 redirect '/dashboard'
             else
