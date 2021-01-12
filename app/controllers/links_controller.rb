@@ -31,19 +31,23 @@ class LinksController < ApplicationController
                 redirect '/dashboard'
             else
                 params[:link][:original_link][:id].each_with_index do |id, index|
-                    @link = Link.find(id)
-                    unless @link.name == params[:link][:name][index]
-                        @link.name = params[:link][:name][index].strip
-                        @link.save
-                    end
-                    unless @link.url == params[:link][:url][index]
-                        @link.url = params[:link][:url][index].strip
-                        if @link.valid_url?
+                    if @link = current_user.links.find(id)
+                        unless @link.name == params[:link][:name][index]
+                            @link.name = params[:link][:name][index].strip
                             @link.save
                         end
-                    end
-                    if params[:link][:check] != nil && params[:link][:check].include?(@link.id.to_s)
-                        @link.delete
+                        unless @link.url == params[:link][:url][index]
+                            @link.url = params[:link][:url][index].strip
+                            if @link.valid_url?
+                                @link.save
+                            end
+                        end
+                        if params[:link][:check] != nil && params[:link][:check].include?(@link.id.to_s)
+                            @link.delete
+                        end
+                    else
+                        flash[:message] = "Unable to update links."
+                        redirect '/dashboard'
                     end
                 end
                 flash[:message] = "Updated"
