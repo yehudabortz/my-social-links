@@ -70,9 +70,13 @@ class UsersController < ApplicationController
     end
     
     get '/:username' do
-        @user = find_by_username_or_email
-        if @user 
-            erb :'users/profile'
+        if valid_credentials?
+            @user = find_by_username_or_email
+            if @user 
+                erb :'users/profile'
+            else
+                erb :not_found
+            end
         else
             erb :not_found
         end

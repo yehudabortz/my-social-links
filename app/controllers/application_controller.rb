@@ -13,8 +13,8 @@ class ApplicationController < Sinatra::Base
       end
 
     get '/' do 
+        @users = User.all
         if logged_in?
-            @users = User.all
             erb :index
         else
             erb :index_not_logged_in

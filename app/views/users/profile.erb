@@ -50,7 +50,7 @@
                 <%= @user.first_name %> <%= @user.last_name %>'s Links
             </h1>
         </div>
-        <% if params[:username] == current_user.username %>
+        <% if logged_in? && params[:username] == current_user.username %>
             <% @user.links.each do |link| %>
                 <a class="btn btn-lg btn-outline-primary" href="<%= link.format_url %>" style="margin-top: 10px; margin-bottom: 10px; position: relative;">
                     <form action="/link/<%= link.id %>" method="POST" style="position: absolute; right: 0; padding-right: 15px;">
