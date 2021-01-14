@@ -25,15 +25,15 @@
         <a href="/dashboard" class="tn btn-link">Dashboard</a>
         <a href="/<%= current_user.username %>" class="tn btn-link">My Profile</a>
         <a href="/feed" class="tn btn-link">Feed</a>
-        <form class="needs-validation" action="/logout" method="POST">
+        <form action="/logout" method="POST">
           <input type="hidden" name="_method" value="DELETE">
-          <input class="btn btn-outline-primary" type="submit" value="Log out">
+          <input class="btn" type="submit" value="Log out">
         </form>
       </div>
       <% else %>
       <div class="nav-links-container">
-        <a href="/login" class="tn btn-link">Log in</a>
-        <a href="/signup" class="btn btn-outline-primary" style="margin-left: 10px;">Sign up</a>
+        <a href="/login">Log in</a>
+        <a href="/signup" class="btn" style="margin-left: 10px;">Sign up</a>
       </div>
       <% end %>
     </nav>
