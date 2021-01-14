@@ -8,9 +8,7 @@
     </div>
     <div class="container">
         <div class="container-box"> 
-            <div class="flex">
-                <h5>Recent Activity</h5>
-            </div>
+            <h5>Recent Activity</h5>
             <br>
             <% @user.following.reverse.each do |user| %>
                 <% unless user.username == @user.username || user.links.empty? %>
