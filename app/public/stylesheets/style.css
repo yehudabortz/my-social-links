@@ -63,6 +63,7 @@ form { position: relative;}
 
 .input-box {
     font-weight: 300;
+    font-size: 16px;
     width: auto;
     display: block;
     font-size: 1rem;
@@ -114,6 +115,19 @@ label {
     height: 35px;
 }
 
+button {
+    position: relative;
+    background: #0d6efd;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    border: solid 1px #0d6efd;
+    border-radius: 3px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
 .btn {
     position: relative;
     background: #0d6efd;
