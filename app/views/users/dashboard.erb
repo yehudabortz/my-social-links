@@ -1,107 +1,107 @@
-<div class="container">
-    <div class="d-flex flex-row" style="margin-top: 25px;">
-        <div>
-            <p style="margin-right: 40px;">Followers</p>
-            <p id="followers" style="color: #2b72f4;"><%= @user.followers_count %></p>
+<section class="container">
+    <div class="container-box">
+        <div class="grid auto-grid-rows">
+            <h1 class="no-margin">Welcome <%= current_user.first_name %></h1>
+            <div class="flex">
+                <div class="margin-right">
+                    <p class="follow-title" >Followers</p>
+                    <p class="follow-count"><%= @user.followers_count %></p>
+                </div>
+                <div>
+                    <p class="follow-title">Following</p>
+                    <p class="follow-count"><%= @user.following_count %></p>
+                </div>
+            </div>
         </div>
-        <div>
-            <p>Following</p>
-            <p id="followers" style="color: #2b72f4;"><%= @user.following_count %></p>
+        <div class="grid auto-grid-columns align-top">
         </div>
     </div>
-        <div class="d-flex flex-column" style="margin-top: 25px;">
-            <div class="py-5 text-center">
-                <h1>Welcome <%= @user.first_name %></h1>
-            </div>
-            <div>
-                <h3>Add A New Link</h3>
+
+<div class="container">
+        <div class="container-box">
+            <h3>Add A New Link</h3>
+            <br>
+            <form class="form-stretch" action="/link" method="POST">
+                <label for="link_name">NAME</label>
+                <input class="input-box" type="text" name="name" id="name"><br>
+                <label for="add_link">URL</label>
+                <input class="input-box" type="text" name="url" id="url"><br>
+                <input class="btn btn-bg" type="submit" value="Save New Link">
+            </form>
+        </div>
+        <% if !@user.links.empty? %>
+        <div class="container-box margin-top">
+            <h3>Edit Your Links</h3>
+            <br>
+                <form class="form-stretch" action="/link" method="POST" id="update-links-form">
+                    <input type="hidden" name="_method" value="patch">
+                        <% @user.links.each_with_index do |link, index| %>
+                        <div class="dashboard-row">
+                            <div class="row-item-counter">
+                                <p><%= index + 1 %>.</p>
+                            </div>
+                            <div class="row-item-1"><a href="<%= link.format_url %>"><%= link.name %></a></div>
+                            <div class="row-item-2">
+                                <input type="hidden" name="link[original_link][id][]" value="<%= link.id %>">
+                                <input class="input-box" type="text" id="<%= link.id %>" name="link[name][]" value="<%= link.name %>">
+                            </div>
+                            <div class="row-item-3"><input class="input-box" type="text" name="link[url][]" value="<%= link.url %>"></div>
+                            <div class="row-item-4">
+                                <div class="flex">
+                                    <button class="flex btn red-outline input-box">Delete<input class="checkbox" type="checkbox" name="link[check][]" value="<%= link.id %>"></button>
+                                </div> 
+                            </div>
+                        </div>
+                        <% end %>
+                </form>
                 <br>
-                <form action="/link" method="POST">
-                    <label for="link_name">NAME</label>
-                    <input class="form-control" type="text" name="name" id="name"><br>
-                    <label for="add_link">URL</label>
-                    <input class="form-control" type="text" name="url" id="url"><br>
-                    <input class="btn btn-outline-primary" type="submit" value="Save New Link">
+                <div class="form-stretch">
+                    <button class="btn btn-bg" type="submit" form="update-links-form">Save Changes</button>
+                </div>
+        </div>
+        <% end %>
+    </div>
+    <div class="container">
+
+        <div class="container-box">
+            <div class="grid auto-grid-rows">
+                <h3>Edit Your Profile</h3>
+                <br>
+                <form class="form-stretch" action="/<%= @user.username %>/edit" method="POST" id="update-profile-form">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <input type="hidden" name="id" value="<%= @user.id %>">
+                    <label for="username">USERNAME</label>
+                    <input class="input-box" type="text" name="updated_username" id="username" value="<%= @user.username %>"><br>
+                    <label for="email">EMAIL</label>
+                    <input class="input-box"type="text" name="updated_email" id="email" value="<%= @user.email %>"><br>
                 </form>
             </div>
-            <br></br>
-            <% if !@user.links.empty? %>
-                <h3>Edit Your Links</h3>
-                <br>
-                <div class="table-wrap">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Link Name</th>
-                                <th scope="col">URL</th>
-                                <th scope="col">Link</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <form action="/link" method="POST" id="update-links-form">
-                            <input type="hidden" name="_method" value="patch">
-                            <tbody>
-                                <% @user.links.each do |link| %>
-                                    <tr class="dashboard-row">
-                                        <td class="col-sm-3" style="padding-left: 0px; padding-right: 10px;">
-                                            <input type="hidden" name="link[original_link][id][]" value="<%= link.id %>">
-                                            <input class="form-control" type="text" id="<%= link.id %>" name="link[name][]" value="<%= link.name %>">
-                                        </td>
-                                        <td style="padding-left: 0px; padding-right: 10px;">
-                                            <input class="form-control" type="text" name="link[url][]" value="<%= link.url %>">
-                                        </td>
-                                        <td class="col-sm-2 style="padding-left: 0px; padding-right: 10px;">
-                                            <a class="btn btn-link" href="<%= link.format_url %>"><%= link.name %></a>
-                                        </td>
-                                        <td class="col-sm-1" style="padding-right: 0px;">
-                                            <div class="btn btn-outline-danger btn-sm" style="display: block; width: 100%;">
-                                                <label for="delete-checkbox">Delete</label>
-                                                <input type="checkbox" name="link[check][]" value="<%= link.id %>" style="margin-left: 10px;">
-                                            </div> 
-                                        </td>
-                                    </tr>
-                                <% end %>
-                            </tbody>
-                        </form>
-                </table>
-                <button class="btn btn-outline-primary" type="submit" form="update-links-form">Save Changes</button>
-                <br>
-                <% end %>
-                <div>
-                    <h3>Edit Your Profile</h3>
-                    <br>
-                    <form action="/<%= @user.username %>/edit" method="POST" id="update-profile-form">
-                        <input type="hidden" name="_method" value="PATCH">
-                        <input type="hidden" name="id" value="<%= @user.id %>">
-                        <label for="username">USERNAME</label>
-                        <input class="form-control" type="text" name="updated_username" id="username" value="<%= @user.username %>"><br>
-                        <label for="email">EMAIL</label>
-                        <input class="form-control" type="text" name="updated_email" id="email" value="<%= @user.email %>"><br>
-                    </form>
-                </div>
-                <button class="btn btn-outline-primary" type="submit" form="update-profile-form">Save Changes</button>
+            <div class="form-stretch">
+                <button class="btn btn-bg" type="submit" form="update-profile-form">Save Changes</button>
             </div>
-            <div>
+            <div class="grid auto-grid-columns align-top">
+            </div>
+        </div>
+        
+    </div>
+    <div class="container">
+        <div class="d-flex flex-column" style="margin-top: 25px; margin-bottom: 25px;">
+            <div class="table-wrap">
+                <table class="table">
+                    <tbody>
+                        <tr class="dashboard-row">
+                            <td>
+                                <form action="/:username" method="post">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <input type="hidden" name="user[username]" value="<%= @user.username %>">
+                                    <input class="btn red-outline" type="submit" value="Delete Account">
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    
-</div>
-<div class="container">
-    <div class="d-flex flex-column" style="margin-top: 25px; margin-bottom: 25px;">
-        <div class="table-wrap">
-            <table class="table">
-                <tbody>
-                    <tr class="dashboard-row">
-                        <td>
-                            <form action="/:username" method="post">
-                                <input type="hidden" name="_method" value="delete">
-                                <input type="hidden" name="user[username]" value="<%= @user.username %>">
-                                <input class="btn btn-outline-danger btn-sm" type="submit" value="Delete Account">
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+
+</section>

@@ -1,26 +1,30 @@
 <section class="container">
-    <div class="py-5 text-center">
-        <h1>Welcome <%= @user.first_name %></h1>
-        <h4>Your Feed</h4>
+    <div class="container-box">
+        <div class="grid auto-grid-rows">
+            <h1 class="no-margin">Welcome <%= current_user.first_name %></h1>
+            <h4>Your Feed</h4>
+        </div>
         <br>
-        <div class="d-flex flex-column" style="margin-top: 25px; overflow: scroll;"> 
-            <div style="display: flex;">
+    </div>
+    <div class="container">
+        <div class="container-box"> 
+            <div class="flex">
                 <h5>Recent Activity</h5>
             </div>
             <br>
             <% @user.following.reverse.each do |user| %>
                 <% unless user.username == @user.username || user.links.empty? %>
-                    <div class="d-flex flex-column">
-                        <div style="display: flex;">
-                                <a class="btn btn-dark" href="<%= user.username %>">@<%= user.username %></a>
+                    <div class="grid auto-grid-rows">
+                        <div class="flex">
+                            <a class="btn dark" href="<%= user.username %>">@<%= user.username %></a>
                         </div>
-                        <br>
                         <% user.links.reverse.each do |link| %>
-                            <div style="display: flex;">
-                                <a class="btn btn-link" href="<%= link.format_url %>">just added – <%= link.name %></a>
+                            <div class="flex">
+                                <a  href="<%= link.format_url %>"><%= link.name %></a>
                             </div>
                         <% end %>
                     </div>
+                    <br></br>
                 <% end %>
             <% end %>
         </div>

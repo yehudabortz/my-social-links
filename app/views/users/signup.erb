@@ -1,27 +1,26 @@
-<div class="container" style="max-width: 500px;">
-    <div class="py-5 text-center">
-        <div class="d-flex flex-column">
+<div class="container">
+        <div class="container-box auto-grid-rows max-w-five">
             <div>
-                <img src="/images/My_Socia_Links_LOGO.svg" width="75" height="75" class="d-inline-block align-top">
+                <img class="logo center" src="/images/My_Socia_Links_LOGO.svg">
+            </div>
+            <div class="auto-grid-rows margin-gap-small text-center">
+                <h2 class="no-margin">My Social Links</h2>
+                <h5 class="no-margin">Sign up</h5>
             </div>
             <br>
-            <h3>My Social Links</h3>
-            <h5>Sign up</h5>
-            <br>
-        <form class="row g-3" action="/signup" method="POST">
-            <input class="form-control" type="text" name="first_name" placeholder="First Name" required autofocus><br>
-            <input class="form-control" type="text" name="last_name" placeholder="Last Name" required><br>
-            <input class="form-control" type="text" name="username" placeholder="Username" required ><br>
-            <input class="form-control" type="text" name="email" placeholder="Email" required><br>
-            <input class="form-control" type="password" name="password" placeholder="Password" required><br>
-            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign up">
+        <form class="form-stretch" action="/signup" method="POST">
+            <input class="input-box"  type="text" name="first_name" placeholder="First Name" required autofocus><br>
+            <input class="input-box"  type="text" name="last_name" placeholder="Last Name" required><br>
+            <input class="input-box"  type="text" name="username" placeholder="Username" required ><br>
+            <input class="input-box"  type="text" name="email" placeholder="Email" required><br>
+            <input class="input-box"  type="password" name="password" placeholder="Password" required><br>
+            <input class="btn btn-bg"  type="submit" value="Sign up">
         </form>
-            <ul class="login-requirements">
+            <ul class="info-text">
                 <p class="login-requirements-item">Password Must Contain</p>
                 <li class="login-requirements-item">Minimum 8 Characters</li>
                 <li class="login-requirements-item">Capital & Lowercase Letter</li>
                 <li class="login-requirements-item">1 Number</li>
             </ul>
         </div>
-    </div>
 </div>
