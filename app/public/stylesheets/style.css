@@ -420,7 +420,7 @@ div.margin-right {
 
 /* #################### Mobile  Styles ######################### */
 
-@media all and (min-width: 1024px) {
+@media screen and (min-device-width: 1024px) {
     .container {
         padding-top: 1vw;
         padding-bottom: 1vw;
@@ -435,7 +435,7 @@ div.margin-right {
     
 }
 
-@media all and (max-width: 1024px) {
+@media screen and (max-device-width: 1024px) {
     .grid.four-column {
         grid-template-columns: 1fr 1fr ;
         grid-auto-columns: 1fr 1fr;
@@ -450,7 +450,7 @@ div.margin-right {
     }
 }
 
-@media all and (max-width: 768px) {
+@media screen and (max-device-width: 768px) {
     .grid.four-column {
 
         grid-auto-columns: 1fr 1fr;
