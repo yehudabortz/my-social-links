@@ -16,7 +16,6 @@
         <div class="grid auto-grid-columns align-top">
         </div>
     </div>
-
 <div class="container">
         <div class="container-box">
             <h3>Add A New Link</h3>
@@ -33,36 +32,34 @@
         <div class="container-box margin-top">
             <h3>Edit Your Links</h3>
             <br>
-                <form class="form-stretch" action="/link" method="POST" id="update-links-form">
-                    <input type="hidden" name="_method" value="patch">
-                        <% @user.links.each_with_index do |link, index| %>
-                        <div class="dashboard-row">
-                            <div class="row-item-counter">
-                                <p><%= index + 1 %>.</p>
-                            </div>
-                            <div class="row-item-1"><a href="<%= link.format_url %>"><%= link.name %></a></div>
-                            <div class="row-item-2">
-                                <input type="hidden" name="link[original_link][id][]" value="<%= link.id %>">
-                                <input class="input-box" type="text" id="<%= link.id %>" name="link[name][]" value="<%= link.name %>">
-                            </div>
-                            <div class="row-item-3"><input class="input-box" type="text" name="link[url][]" value="<%= link.url %>"></div>
-                            <div class="row-item-4">
-                                <div class="flex">
-                                    <button class="flex btn red-outline input-box">Delete<input class="checkbox" type="checkbox" name="link[check][]" value="<%= link.id %>"></button>
-                                </div> 
-                            </div>
+            <form class="form-stretch" action="/link" method="POST" id="update-links-form">
+                <input type="hidden" name="_method" value="patch">
+                    <% @user.links.each_with_index do |link, index| %>
+                    <div class="dashboard-row">
+                        <div class="row-item-counter">
+                            <p><%= index + 1 %>.</p>
                         </div>
-                        <% end %>
-                </form>
-                <br>
-                <div class="form-stretch">
-                    <button class="btn btn-bg" type="submit" form="update-links-form">Save Changes</button>
-                </div>
+                        <div class="row-item-1"><a href="<%= link.format_url %>"><%= link.name %></a></div>
+                        <div class="row-item-2">
+                            <input type="hidden" name="link[original_link][id][]" value="<%= link.id %>">
+                            <input class="input-box" type="text" id="<%= link.id %>" name="link[name][]" value="<%= link.name %>">
+                        </div>
+                        <div class="row-item-3"><input class="input-box" type="text" name="link[url][]" value="<%= link.url %>"></div>
+                        <div class="row-item-4">
+                            <div class="flex">
+                                <button class="flex btn red-outline input-box">Delete<input class="checkbox" type="checkbox" name="link[check][]" value="<%= link.id %>"></button>
+                            </div> 
+                        </div>
+                    </div>
+                    <% end %>
+            </form>
+            <br>
+            <div class="form-stretch">
+                <button class="btn btn-bg" type="submit" form="update-links-form">Save Changes</button>
+            </div>
         </div>
         <% end %>
     </div>
-    <div class="container">
-
         <div class="container-box">
             <div class="grid auto-grid-rows">
                 <h3>Edit Your Profile</h3>
@@ -79,29 +76,13 @@
             <div class="form-stretch">
                 <button class="btn btn-bg" type="submit" form="update-profile-form">Save Changes</button>
             </div>
-            <div class="grid auto-grid-columns align-top">
-            </div>
+    
         </div>
-        
-    </div>
-    <div class="container">
-        <div class="d-flex flex-column" style="margin-top: 25px; margin-bottom: 25px;">
-            <div class="table-wrap">
-                <table class="table">
-                    <tbody>
-                        <tr class="dashboard-row">
-                            <td>
-                                <form action="/:username" method="post">
-                                    <input type="hidden" name="_method" value="delete">
-                                    <input type="hidden" name="user[username]" value="<%= @user.username %>">
-                                    <input class="btn red-outline" type="submit" value="Delete Account">
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="container">
+            <form action="/:username" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="user[username]" value="<%= @user.username %>">
+                <input class="btn red-outline" type="submit" value="Delete Account">
+            </form>
         </div>
-    </div>
-
 </section>
