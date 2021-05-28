@@ -1,10 +1,12 @@
 # My Social Links
+
 ### A one-page directory for all your social media links.
 
 Using Sinatra and Active Record a user can Sign Up / Sign In to their account and CREATE, READ, UPDATE and DELETE links from the dashboard.
 Users can also follow their friends to see what relevant links they are sharing.
 
-[www.mysocialinks.com](http://www.mysocialinks.com/)
+- [Live Site](http://www.mysocialinks.com/)
+- [Demo Video](https://drive.google.com/file/d/1KyMCcXN48uh_V1LSF1iLieFBMl1Sah-u/view?usp=sharing)
 
 ## Installation
 
@@ -12,11 +14,13 @@ Users can also follow their friends to see what relevant links they are sharing.
 
 - Use Ruby Gem [bundler](https://bundler.io/) to install dependencies.
 
-``` bash
+```bash
 gem install bundler
 ```
+
 - Install required Ruby Gems.
-``` bash
+
+```bash
 bundle install
 ```
 
@@ -27,23 +31,27 @@ rake db:migrate
 ```
 
 - Use Rake to add seed data.
+
 ```bash
 rake db:seed
 ```
 
-- Use Shotgun to start server. 
+- Use Shotgun to start server.
 
 ```bash
 shotgun
 ```
+
 - Open a new tab in your browser.
 
-``` bash
+```bash
 http://localhost:9393
 ```
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
+
 [MIT](https://github.com/yehudabortz/my-social-links/blob/main/LICENSE)
